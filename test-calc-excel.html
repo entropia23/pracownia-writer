@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calc / Excel — test dla klasy II LO</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f1f5f3;color:#193e35;
+font:17px/1.6 system-ui,sans-serif}
+main{max-width:950px;margin:auto;padding:30px 18px}
+h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.15}
+.card,fieldset{background:white;border:1px solid #cbd9d1;
+border-radius:12px;padding:22px;margin:20px 0;min-width:0}
+legend{font-weight:700;padding:0 8px;max-width:100%}
+.answer{display:flex;gap:12px;border:1px solid #d6dfda;
+border-radius:7px;margin:10px 0;padding:12px;cursor:pointer}
+.answer:has(input:checked){background:#e2efda;border-color:#29604d}
+input[type=radio]{margin-top:7px;accent-color:#29604d}
+.identity{display:grid;grid-template-columns:1fr 1fr 120px;gap:15px}
+.identity input{display:block;width:100%;padding:10px;font:inherit;
+border:1px solid #8fa69a;border-radius:6px}
+button{padding:12px 18px;border:0;border-radius:7px;
+background:#245944;color:white;font:inherit;cursor:pointer;margin:5px}
+button:disabled{opacity:.6;cursor:default}
+:focus-visible{outline:3px solid #b87900;outline-offset:3px}
+progress,textarea{width:100%}
+progress{accent-color:#245944}
+textarea{min-height:200px;padding:12px;font:inherit}
+.stats{display:flex;gap:30px;flex-wrap:wrap;font-size:1.5rem}
+.note{color:#52665b;font-size:.9rem}
+.error{color:#a12626}
+.feedback{padding:12px;background:#fff4df;border-left:4px solid #b87900}
+.good{background:#eaf4e4;border-color:#245944}
+table{width:100%;border-collapse:collapse}
+td,th{padding:10px;border-bottom:1px solid #ccd9d1;text-align:left;
+vertical-align:top}
+summary{cursor:pointer;font-weight:700}
+[hidden]{display:none!important}
+@media(max-width:600px){.identity{grid-template-columns:1fr}}
+@media print{
+body{background:white}button,progress,.no-print{display:none}
+fieldset,tr,.card{break-inside:avoid}main{padding:0}
+body.print-result #intro,body.print-result #quiz,
+body.print-result #teacher{display:none}
+body.print-key #intro,body.print-key #quiz,
+body.print-key #result{display:none}
+}
+</style>
+</head>
+<body>
+<main>
+<section id="intro">
+<p>INFORMATYKA · KLASA II LO · POZIOM ŚREDNI</p>
+<h1>LibreOffice Calc / Excel</h1>
+<p>17 pytań · 17 punktów · około 25 minut</p>
+<div class="card">
+<h2>Instrukcja</h2>
+<p>W każdym pytaniu wybierz <strong>jedną poprawną odpowiedź</strong>.
+Poprawna odpowiedź: 1 punkt, błędna: 0 punktów.
+Przed zakończeniem odpowiedz na wszystkie pytania.</p>
+<p>Przyjmujemy polskie nazwy funkcji, przecinek dziesiętny
+i średnik jako separator argumentów.</p>
+<p><strong>Skala ocen:</strong>
+0–5 pkt: 1; 6–8 pkt: 2; 9–11 pkt: 3;
+12–15 pkt: 4; 16 pkt: 5; 17 pkt: 6.</p>
+<p class="note">Proponowane progi: 30%, 50%, 70%, 90%, 100%.
+Ocena jest liczona przed zaokrągleniem procentów.
+To skala tego testu, którą nauczyciel powinien dopasować
+do zasad oceniania w szkole.</p>
+<p class="note">Po zakończeniu możesz wysłać imię, nazwisko,
+klasę, punkty, procent i ocenę przez FormSubmit na
+rafal.edu@outlook.com. Dane nie są zapisywane w repozytorium GitHub.
+Odświeżenie strony usuwa bieżące odpowiedzi i wynik.</p>
+</div>
+</section>
+
+<noscript>Do rozwiązania testu potrzebny jest JavaScript.</noscript>
+
+<form id="quiz" novalidate>
+<div class="card identity">
+<label>Imię<input id="first" maxlength="60" autocomplete="given-name" required></label>
+<label>Nazwisko<input id="last" maxlength="80" autocomplete="family-name" required></label>
+<label>Klasa<input id="className" maxlength="15" placeholder="np. 2A" required></label>
+</div>
+<p id="progressText" aria-live="polite">Odpowiedzi: 0 / 17</p>
+<progress id="progress" max="17" value="0"
+aria-label="Liczba pytań z odpowiedzią"></progress>
+<div id="questions"></div>
+<p id="error" class="error" role="alert"></p>
+<button id="finish" type="submit">Zakończ i sprawdź wynik</button>
+</form>
+
+<section id="result" class="card" tabindex="-1" hidden>
+<h2>Twój wynik</h2>
+<p id="identity"></p>
+<div class="stats">
+<strong id="points"></strong>
+<strong id="percent"></strong>
+<strong id="grade"></strong>
+</div>
+<h3>Nad czym pracować?</h3>
+<ul id="tips"></ul>
+<h3>Przekaż wynik nauczycielowi</h3>
+<label for="report">Dane do wysłania</label>
+<textarea id="report" readonly></textarea>
+<p class="note">Wysyłka nastąpi dopiero po kliknięciu przycisku.
+Nie potrzebujesz własnego programu pocztowego.
+<a href="https://formsubmit.co/privacy.pdf"
+target="_blank" rel="noopener">Prywatność FormSubmit</a>.</p>
+<button id="send" type="button">Wyślij wynik nauczycielowi</button>
+<button id="copy" type="button">Kopiuj wynik</button>
+<button id="printResult" type="button">Drukuj wynik</button>
+<p id="sendStatus" role="status">Wynik nie został jeszcze wysłany.</p>
+<p id="copyStatus" role="status"></p>
+<details>
+<summary>Omówienie odpowiedzi</summary>
+<div id="review"></div>
+</details>
+</section>
+
+<section id="teacher" class="card">
+<details id="teacherDetails">
+<summary>Karta odpowiedzi dla nauczyciela</summary>
+<p>Klucz jest jawny. Przed udostępnieniem uczniom można usunąć
+z pliku całą sekcję o identyfikatorze „teacher”. Odpowiedzi nadal
+znajdują się w kodzie JavaScript, dlatego wynik należy
+weryfikować podczas sprawdzianu.</p>
+<p>1 punkt za odpowiedź poprawną, 0 za błędną. Maksimum: 17 pkt.</p>
+<table>
+<thead><tr><th>Nr</th><th>Klucz</th><th>Uzasadnienie</th></tr></thead>
+<tbody id="key"></tbody>
+</table>
+<button type="button" id="printKey">Drukuj kartę odpowiedzi</button>
+<p class="note">Jeśli FormSubmit prześle wiadomość aktywacyjną,
+zatwierdź adres, sprawdzając także Spam. Przed testem klasowym
+sprawdź odbiór próbnego wyniku. Potwierdzenie przyjęcia przez
+usługę nie potwierdza doręczenia e-maila.</p>
+</details>
+</section>
+</main>
+
+<script>
+"use strict";
+
+// Kolejność pól: pytanie, odpowiedzi, indeks poprawnej (0–3),
+// obszar umiejętności, wyjaśnienie.
+const Q = [
+[
+"W B2 jest liczba sprzedanych biletów, a w C2 cena jednego biletu. Która formuła obliczy przychód?",
+["=B2+C2","=B2*C2","=SUMA(B2:C2)","=B2/C2"],
+1,"Formuły",
+"Przychód to liczba biletów pomnożona przez cenę."
+],
+[
+"W D2 wpisano =B2*C2. Jak będzie wyglądała formuła po skopiowaniu jej do D5?",
+["=B2*C2","=E2*F2","=B3*C3","=B5*C5"],
+3,"Adresowanie",
+"Adresy względne przesuwają się o trzy wiersze: =B5*C5."
+],
+[
+"W B2 jest cena, a w F1 rabat 10%. Która formuła oblicza cenę po rabacie i zachowuje odwołanie do F1 przy kopiowaniu w dół?",
+["=B2*(1-$F$1)","=$B$2*(1-F1)","=B2*(1-F1)","=B2*$F$1"],
+0,"Adresowanie",
+"$F$1 blokuje adres rabatu. Cena po rabacie to cena razy (1−rabat)."
+],
+[
+"Formułę =$B2*C$1 z C2 kopiujesz do D3, czyli o kolumnę w prawo i wiersz w dół. Co otrzymasz?",
+["=$C3*D$2","=$B2*C$1","=$B3*D$1","=B$3*$D1"],
+2,"Adresowanie",
+"W $B2 zablokowana jest kolumna, a w C$1 wiersz."
+],
+[
+"W B2:B6 są kolejno: 4, 0, 6, pusta komórka, 10. Jaki wynik zwróci =ŚREDNIA(B2:B6)?",
+["4","5","6,67","20"],
+1,"Funkcje",
+"Zero jest liczone, pusta komórka pomijana: (4+0+6+10)/4=5."
+],
+[
+"W C2:C20 zapisano kwoty wydatków. Która formuła obliczy ich łączną wartość?",
+["=ŚREDNIA(C2:C20)","=C2+C20","=SUMA(C2:C20)","=MAX(C2:C20)"],
+2,"Funkcje",
+"SUMA dodaje wszystkie liczby z zakresu; C2+C20 tylko dwie skrajne."
+],
+[
+"W D2 jest 50. Co zwróci =JEŻELI(D2>=50;\"Zaliczone\";\"Poprawa\")?",
+["Zaliczone","Poprawa","50","Błąd, ponieważ 50 nie jest większe od 50"],
+0,"Warunki",
+">= oznacza „większe lub równe”, więc warunek jest spełniony."
+],
+[
+"W B2:B6 są liczby 30, 50, 70, 50, 40. Jaki wynik da =LICZ.JEŻELI(B2:B6;\">=50\")?",
+["2","4","5","3"],
+3,"Warunki",
+"Warunek spełniają trzy komórki: 50, 70 i 50."
+],
+[
+"W A2:A10 są kategorie wydatków, a w B2:B10 kwoty. Jak zsumować tylko kategorię „Transport”?",
+[
+"=LICZ.JEŻELI(A2:A10;\"Transport\")",
+"=SUMA.JEŻELI(A2:A10;\"Transport\";B2:B10)",
+"=SUMA(B2:B10)",
+"=SUMA.JEŻELI(B2:B10;\"Transport\";A2:A10)"
+],
+1,"Warunki",
+"Argumenty to: zakres sprawdzany, kryterium, zakres sumowania."
+],
+[
+"Uczeń ma ocenę 3 z wagą 1 i ocenę 5 z wagą 3. Ile wynosi średnia ważona?",
+["4","4,25","4,5","6"],
+2,"Średnia ważona",
+"(3×1+5×3)/(1+3)=18/4=4,5."
+],
+[
+"W B2:B5 są oceny, w C2:C5 wagi, a w D2:D5 iloczyny ocen i wag. Suma wag jest dodatnia. Jak obliczyć średnią ważoną?",
+[
+"=ŚREDNIA(B2:B5)",
+"=SUMA(D2:D5)/4",
+"=SUMA(B2:B5)/SUMA(C2:C5)",
+"=SUMA(D2:D5)/SUMA(C2:C5)"
+],
+3,"Średnia ważona",
+"Sumę iloczynów dzielimy przez sumę wag, nie przez liczbę ocen."
+],
+[
+"Formuła =B2/C2 zwraca błąd dzielenia przez zero, bo C2 zawiera 0. Co należy zrobić najpierw?",
+[
+"Sprawdzić znaczenie C2 i ustalić prawidłowe dane lub obsługę zerowego mianownika",
+"Zmienić format wyniku na walutowy",
+"Zastąpić wszystkie zera w arkuszu jedynkami",
+"Poszerzyć kolumnę"
+],
+0,"Kontrola danych",
+"Należy sprawdzić przyczynę i sens obliczenia, zamiast dowolnie zmieniać dane."
+],
+[
+"W A2 jest liczba 0,25. Co zobaczysz po zastosowaniu formatu procentowego bez miejsc po przecinku?",
+["0%","0,25%","25%","250%"],
+2,"Formatowanie",
+"0,25 odpowiada 25%. Format zmienia sposób wyświetlania wartości."
+],
+[
+"Tabela zawiera nazwiska, klasy i wyniki. Jak posortować wyniki malejąco, zachowując ich przypisanie do uczniów?",
+[
+"Posortować tylko liczby w kolumnie wyników",
+"Posortować całą tabelę według wyników, rozpoznając nagłówki",
+"Posortować nazwiska i wyniki niezależnie",
+"Usunąć kolumnę z klasą"
+],
+1,"Analiza danych",
+"Należy przestawiać całe wiersze, aby nie zniszczyć powiązań danych."
+],
+[
+"Na tabelę uczniów nakładasz filtr: klasa = 2A. Co dzieje się z wierszami pozostałych klas?",
+[
+"Są trwale usuwane",
+"Przenoszą się do nowego pliku",
+"Ich wartości zmieniają się na zero",
+"Są ukryte przez filtr i można je ponownie wyświetlić"
+],
+3,"Analiza danych",
+"Filtrowanie ogranicza widoczność danych, ale nie usuwa rekordów."
+],
+[
+"Dane zawierają klasę, miesiąc i liczbę wypożyczonych książek. Który układ tabeli przestawnej pokaże sumę książek dla każdej klasy w każdym miesiącu?",
+[
+"Wiersze: klasa; kolumny: miesiąc; wartości: suma liczby książek",
+"Wiersze: liczba książek; wartości: suma nazw klas",
+"Wartości: licznik miesiąca, bez pola klasa",
+"Wiersze: klasa; wartości: maksimum książek, bez miesiąca"
+],
+0,"Analiza danych",
+"Klasy i miesiące grupują dane, a SUMA oblicza łączną liczbę książek."
+],
+[
+"Chcesz pokazać zmianę temperatury mierzonej codziennie przez miesiąc. Który wykres jest najodpowiedniejszy?",
+[
+"Kołowy z wycinkiem dla każdego dnia",
+"Pierścieniowy z udziałami procentowymi",
+"Liniowy: dni na osi poziomej, temperatura na pionowej",
+"Kołowy z sumą wszystkich temperatur"
+],
+2,"Analiza danych",
+"Wykres liniowy pokazuje kolejne pomiary i przebieg zmian w czasie."
+]
+];
+
+const tips = {
+"Formuły":"Przećwicz zamianę opisu zadania na działania na komórkach.",
+"Adresowanie":"Porównaj kopiowanie B2, $B$2, $B2 i B$2 w dół i w prawo.",
+"Funkcje":"Porównaj SUMA i ŚREDNIA oraz wpływ zera i pustej komórki.",
+"Warunki":"Przećwicz JEŻELI, LICZ.JEŻELI i SUMA.JEŻELI, także na granicy progu.",
+"Średnia ważona":"Zbuduj kolumny: ocena, waga, iloczyn; sumę iloczynów podziel przez sumę wag.",
+"Kontrola danych":"Sprawdzaj dane wejściowe i mianownik przed poprawianiem formuły.",
+"Formatowanie":"Porównaj wartość 0,25 z jej prezentacją jako 25%.",
+"Analiza danych":"Przećwicz sortowanie całych wierszy, filtr, tabelę przestawną i wykres liniowy."
+};
+
+const $ = id => document.getElementById(id);
+const letters = "ABCD";
+let completed = false, payload = null, sending = false, sent = false;
+
+function gradeFor(points) {
+  const p = points / 17 * 100;
+  return p === 100 ? 6 : p >= 90 ? 5 : p >= 70 ? 4 :
+         p >= 50 ? 3 : p >= 30 ? 2 : 1;
+}
+
+function answers() {
+  return Q.map((_, i) => {
+    const el = document.querySelector('input[name="q'+i+'"]:checked');
+    return el ? Number(el.value) : null;
+  });
+}
+
+function clean(value) {
+  return value.trim().replace(/[\r\n\t]+/g, " ");
+}
+
+Q.forEach((item, i) => {
+  const field = document.createElement("fieldset");
+  const legend = document.createElement("legend");
+  legend.textContent = (i+1)+". "+item[0];
+  field.append(legend);
+
+  item[1].forEach((answer, j) => {
+    const label = document.createElement("label");
+    label.className = "answer";
+    const radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = "q"+i;
+    radio.value = j;
+    const span = document.createElement("span");
+    span.textContent = letters[j]+". "+answer;
+    label.append(radio, span);
+    field.append(label);
+  });
+  $("questions").append(field);
+
+  const row = document.createElement("tr");
+  [i+1, letters[item[2]], item[4]].forEach(value => {
+    const cell = document.createElement("td");
+    cell.textContent = value;
+    row.append(cell);
+  });
+  $("key").append(row);
+});
+
+$("quiz").addEventListener("change", () => {
+  const n = answers().filter(x => x !== null).length;
+  $("progress").value = n;
+  $("progressText").textContent = "Odpowiedzi: "+n+" / 17";
+});
+
+$("quiz").addEventListener("submit", event => {
+  event.preventDefault();
+  if (completed) return;
+
+  for (const [id, label] of [
+    ["first","imię"],["last","nazwisko"],["className","klasę"]
+  ]) {
+    if (!clean($(id).value)) {
+      $("error").textContent = "Uzupełnij "+label+".";
+      $(id).focus();
+      return;
+    }
+  }
+
+  const selected = answers();
+  const missing = selected.indexOf(null);
+  if (missing !== -1) {
+    $("error").textContent = "Odpowiedz na pytanie "+(missing+1)+".";
+    document.querySelector('input[name="q'+missing+'"]').focus();
+    return;
+  }
+
+  completed = true;
+  $("error").textContent = "";
+  const points = selected.reduce(
+    (sum, value, i) => sum + Number(value === Q[i][2]), 0
+  );
+  const percent = (points/17*100).toLocaleString("pl-PL", {
+    minimumFractionDigits:2, maximumFractionDigits:2
+  })+"%";
+  const grade = gradeFor(points);
+
+  payload = Object.freeze({
+    "Test":"Calc / Excel — klasa II LO",
+    "Nazwisko":clean($("last").value),
+    "Imię":clean($("first").value),
+    "Klasa":clean($("className").value),
+    "Punkty":points+" / 17",
+    "Procent poprawnych odpowiedzi":percent,
+    "Ocena":String(grade)
+  });
+
+  $("identity").textContent =
+    payload["Imię"]+" "+payload.Nazwisko+" · "+payload.Klasa;
+  $("points").textContent = points+" / 17 pkt";
+  $("percent").textContent = percent;
+  $("grade").textContent = "Ocena: "+grade;
+  $("report").value = Object.entries(payload)
+    .map(([key,value]) => key+": "+value).join("\n");
+
+  const missed = new Map();
+  Q.forEach((item,i) => {
+    const correct = selected[i] === item[2];
+    if (!correct) {
+      if (!missed.has(item[3])) missed.set(item[3], []);
+      missed.get(item[3]).push(i+1);
+    }
+    const p = document.createElement("p");
+    p.className = "feedback"+(correct ? " good" : "");
+    p.textContent = (i+1)+". "+(correct ? "1/1 pkt. " : "0/1 pkt. ")+
+      "Twoja odpowiedź: "+letters[selected[i]]+
+      ". Poprawna: "+letters[item[2]]+". "+item[4];
+    $("review").append(p);
+  });
+
+  missed.forEach((numbers,topic) => {
+    const li = document.createElement("li");
+    li.textContent = topic+" — pytania "+numbers.join(", ")+
+      ". "+tips[topic];
+    $("tips").append(li);
+  });
+  if (!missed.size) {
+    const li = document.createElement("li");
+    li.textContent = "Wszystkie odpowiedzi poprawne! Przygotuj teraz "+
+      "własny arkusz z formułami, tabelą przestawną i wykresem.";
+    $("tips").append(li);
+  }
+
+  $("quiz").querySelectorAll("input").forEach(el => el.disabled = true);
+  $("finish").hidden = true;
+  $("result").hidden = false;
+  $("result").focus();
+  $("result").scrollIntoView({behavior:"smooth"});
+});
+
+$("send").addEventListener("click", async () => {
+  if (!payload || sending || sent) return;
+  sending = true;
+  $("send").disabled = true;
+  $("sendStatus").textContent = "Wysyłanie wyniku…";
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 20000);
+
+  try {
+    const response = await fetch(
+      "https://formsubmit.co/ajax/rafal.edu@outlook.com",
+      {
+        method:"POST",
+        headers:{"Content-Type":"application/json","Accept":"application/json"},
+        credentials:"omit",
+        body:JSON.stringify({
+          ...payload,
+          _subject:"Wynik testu Calc / Excel — klasa II LO"
+        }),
+        signal:controller.signal
+      }
+    );
+    if (!response.ok) throw new Error("HTTP "+response.status);
+    const data = await response.json();
+    if (data.success !== true && data.success !== "true") {
+      throw new Error("Nie przyjęto zgłoszenia");
+    }
+    sent = true;
+    $("send").textContent = "Wynik przekazany";
+    $("sendStatus").textContent =
+      "FormSubmit przyjął wynik. Nie jest to potwierdzenie doręczenia "+
+      "e-maila. Nauczyciel może potrzebować aktywacji adresu.";
+  } catch {
+    $("sendStatus").textContent =
+      "Nie udało się potwierdzić przyjęcia wyniku. Skopiuj podsumowanie "+
+      "lub ponów wysyłkę. Ponowienie może utworzyć duplikat, "+
+      "jeżeli wcześniejsze zgłoszenie dotarło.";
+    $("send").textContent = "Ponów wysyłanie";
+  } finally {
+    clearTimeout(timeout);
+    sending = false;
+    $("send").disabled = sent;
+  }
+});
+
+$("copy").addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText($("report").value);
+    $("copyStatus").textContent = "Skopiowano wynik.";
+  } catch {
+    $("report").focus();
+    $("report").select();
+    $("copyStatus").textContent = "Naciśnij Ctrl+C, aby skopiować wynik.";
+  }
+});
+
+$("printResult").addEventListener("click", () => {
+  document.body.classList.remove("print-key");
+  document.body.classList.add("print-result");
+  window.print();
+});
+$("printKey").addEventListener("click", () => {
+  $("teacherDetails").open = true;
+  document.body.classList.remove("print-result");
+  document.body.classList.add("print-key");
+  window.print();
+});
+window.addEventListener("afterprint", () => {
+  document.body.classList.remove("print-result","print-key");
+});
+</script>
+</body>
+</html>
