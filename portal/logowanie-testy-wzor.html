@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strefa testów — wzór logowania</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f4f7;color:#292d45;font:16px/1.6 system-ui,sans-serif}main{max-width:480px;margin:60px auto;padding:28px;background:#fff}h1{font-size:26px;margin:0 0 20px}label{display:block;font-weight:600;margin:18px 0 6px}input{width:100%;padding:12px;font:inherit;border:1px solid #858995;border-radius:3px}button{width:100%;margin-top:24px;padding:12px;font:inherit;background:#292d45;color:#fff;border:0;border-radius:3px}button:disabled{background:#626674;cursor:not-allowed}.note{font-size:14px;color:#555b68}.status{border-top:1px solid #ccc;padding-top:16px}input:focus-visible{outline:3px solid #6973bb;outline-offset:2px}@media(max-width:500px){main{margin:20px 12px;padding:24px}}
+</style>
+</head>
+<body>
+<main>
+<a href="index.html" style="color:inherit">← Strona główna</a><h1 style="margin-top:20px">Strefa testów</h1>
+<p class="note">Wpisz stałe hasło i kod sesji otrzymany od nauczyciela.</p>
+<!-- Projekt formularza: hasło stałe + kod sesji. Brak wdrożonej weryfikacji. Nie włączaj przekierowania jako rzekomego zabezpieczenia strony publicznej. -->
+<form id="access-form">
+<label for="password">Stałe hasło</label>
+<input id="password" name="password" type="password" autocomplete="off" required>
+<!-- Kod wydaje nauczyciel. Planowany czas sesji: 45 minut. GitHub Pages sam nie wymusza wygaśnięcia. -->
+<label for="session-code">Kod sesji</label>
+<input id="session-code" name="session_code" type="text" inputmode="numeric" pattern="[0-9]{8}" minlength="8" maxlength="8" autocomplete="off" placeholder="8 cyfr od nauczyciela" aria-describedby="code-help" required>
+<p class="note" id="code-help">Kod podaje nauczyciel na początku zajęć. Planowany czas sesji: 45 minut.</p>
+<button type="submit" disabled>Wejdź do testów</button>
+</form>
+<p class="note status">Logowanie do testów nie jest jeszcze uruchomione. Nie wpisuj hasła.</p>
+</main>
+<script>
+// Zapobiega przesłaniu danych z demonstracyjnego formularza, także klawiszem Enter.
+document.getElementById('access-form').addEventListener('submit', function(event) {
+ event.preventDefault();
+});
+</script>
+</body>
+</html>
+
