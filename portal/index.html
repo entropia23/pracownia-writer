@@ -1,0 +1,410 @@
+<!doctype html><html lang="pl"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+.home-title-row{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}.tests-entry{display:inline-block;border:2px solid #b82028;border-radius:3px;padding:10px 24px;color:#b82028;background:#fff;font-weight:700;text-decoration:none;white-space:nowrap}.tests-entry:hover,.tests-entry:focus-visible{background:#b82028;color:#fff}.tests-entry:focus-visible{outline:3px solid #292d45;outline-offset:3px}
+</style><title>Informatyka: pliki i materiały do zajęć</title></head><body>
+
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@500;600&family=Fira+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: pasek tytułowy i menu jak na szkolylodz.wordpress.com, pod nim panel filtrów i cztery sekcje wiekowe z listami stron. */
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --ink: #000000;
+  --muted: #4d4d4d;
+  --accent: #000000;
+  --accent-soft: #f0f0f0;
+  --line: #d6d6d6;
+  --ok: #17724a;
+  --warn: #8a5a00;
+  --pay: #a23b3b;
+  --font-body: "Fira Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-label: "Fira Sans Condensed", "Fira Sans", "Arial Narrow", sans-serif;
+}
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.55; margin: 0; }
+a { color: var(--ink); }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.wrap { max-width: 1120px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* nagłówek */
+.site { background: var(--surface); border-bottom: 1px solid var(--line); }
+.site .wrap { padding-block: 28px 0; }
+.site-name { font-family: var(--font-label); text-transform: uppercase; letter-spacing: .14em; font-size: 13px; color: var(--muted); margin: 0 0 6px; }
+h1 { font-size: clamp(26px, 4.4vw, 40px); line-height: 1.12; margin: 0; font-weight: 700; text-wrap: balance; }
+.tagline { margin: 8px 0 0; color: var(--muted); font-size: 17px; }
+.menu { display: flex; flex-wrap: wrap; gap: 0 28px; margin-top: 22px; }
+.menu a, .menu span { font-family: var(--font-label); font-weight: 600; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; padding: 12px 0; color: var(--ink); border-bottom: 3px solid transparent; }
+.menu a:hover { color: var(--accent); }
+.menu .on { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* wstęp */
+.intro { padding-block: 28px 8px; max-width: 70ch; }
+.intro p { margin: 0 0 8px; }
+.legend { color: var(--muted); font-size: 14px; }
+
+/* filtry */
+.filters { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px; margin-block: 20px 8px; display: grid; gap: 16px; }
+.f-row { display: grid; gap: 8px; }
+.f-label { font-family: var(--font-label); text-transform: uppercase; letter-spacing: .1em; font-size: 12.5px; font-weight: 600; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: inherit; font-size: 14px; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer; line-height: 1.3; }
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); font-weight: 500; }
+.f-top { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; }
+.search { flex: 1 1 260px; min-width: 0; display: grid; gap: 8px; }
+.search input { font: inherit; width: 100%; padding: 10px 12px; background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; }
+.reset { font: inherit; font-size: 14px; background: none; border: 0; color: var(--accent); text-decoration: underline; cursor: pointer; padding: 10px 4px; }
+.f-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px 24px; }
+.count { font-size: 14px; color: var(--muted); margin: 14px 0 0; }
+.count strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* sekcje wiekowe */
+.group { margin-top: 36px; scroll-margin-top: 16px; }
+.g-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; border-bottom: 2px solid var(--ink); padding-bottom: 8px; }
+.g-head h2 { margin: 0; font-size: clamp(22px, 3vw, 28px); line-height: 1.2; }
+.g-age { font-family: var(--font-label); text-transform: uppercase; letter-spacing: .1em; font-size: 13px; color: var(--muted); }
+.g-n { margin-left: auto; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.g-lead { margin: 14px 0 0; max-width: 72ch; }
+.list { list-style: none; padding: 0; margin: 12px 0 0; display: grid; grid-template-columns: 1fr; border-top: 1px solid var(--line); }
+@media (min-width: 900px) { .list { grid-template-columns: 1fr 1fr; column-gap: 32px; } }
+.item { padding: 14px 0; border-bottom: 1px solid var(--line); min-width: 0; display: grid; gap: 6px; align-content: start; }
+.i-top { display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: baseline; }
+.i-name { font-weight: 600; font-size: 17px; line-height: 1.3; }
+.i-name a { text-decoration-thickness: 1px; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.i-ok { font-size: 12.5px; color: var(--ok); font-weight: 500; white-space: nowrap; }
+.i-url { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+.i-desc { margin: 0; font-size: 15px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-family: var(--font-label); font-size: 12.5px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; background: var(--accent-soft); color: var(--accent); }
+.tag.plain { background: transparent; color: var(--muted); border: 1px solid var(--line); }
+.tag.free { color: var(--ok); }
+.tag.freemium { color: var(--warn); }
+.tag.paid { color: var(--pay); }
+.path { margin: 16px 0 0; padding: 12px 14px; background: var(--accent-soft); border-radius: 6px; font-size: 15px; }
+.path b { font-family: var(--font-label); text-transform: uppercase; letter-spacing: .1em; font-size: 12.5px; margin-right: 8px; }
+.empty { padding: 40px 0; text-align: center; color: var(--muted); }
+.foot { margin-block: 48px 40px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+</style>
+
+<style>
+/* Górna część strony głównej. Style katalogu poniżej pozostają bez zmian. */
+.home-header .wrap { padding-top: 36px; padding-bottom: 28px; }
+.home-upload { margin-top: 26px; background: #f0f0f0; padding: 22px 24px; border-radius: 6px; }
+.home-upload p { margin: 0 0 16px; }
+.home-upload-button { display: inline-block; padding: 10px 20px; background: #000; color: #fff; border: 1px solid #000; border-radius: 4px; font-weight: 500; text-decoration: none; }
+.home-upload-button:hover { background: #333; }
+.home-divider { margin: 0; border: 0; border-top: 1px solid var(--line); }
+@media(max-width: 600px) { .home-header .wrap { padding-top: 24px; } .home-upload { padding: 18px; } }
+</style>
+<header class="home-header">
+  <div class="wrap">
+    <div class="home-title-row"><h1>Informatyka: pliki i materiały do zajęć</h1><a class="tests-entry" href="logowanie-testy-wzor.html">TESTY</a></div>
+    <div class="home-upload">
+      <p><strong>Możesz przesłać pliki z Twoją pracą metodą przeciągnij i upuść</strong></p>
+      <a class="home-upload-button" href="https://entropia23.github.io/pracownia-writer/kontakt-github.html">Prześlij pliki</a>
+    </div>
+  </div>
+</header>
+<div class="wrap"><hr class="home-divider"></div>
+
+<main class="wrap">
+  <section class="intro">
+    <p>Strony do nauki Pythona, SQL, analizy danych i arkuszy kalkulacyjnych oraz organizacje edukacyjne, podzielone na cztery grupy wiekowe. Zestawienie z 13 października 2026.</p>
+    <p class="legend"><span class="i-ok">✔ Sprawdzone</span> oznacza stronę, którą potwierdziłem wyszukiwaniem w sieci. Pozostałe to znane serwisy, ale ceny i dostępność polskiej wersji warto sprawdzić przed użyciem.</p>
+  </section>
+
+  <section class="filters" aria-label="Filtry">
+    <div class="f-top">
+      <div class="search">
+        <label class="f-label" for="q">Szukaj</label>
+        <input id="q" type="search" placeholder="np. Scratch, SQL, matura, certyfikat" autocomplete="off">
+      </div>
+      <button class="reset" id="reset" type="button">Wyczyść filtry</button>
+    </div>
+    <div class="f-row">
+      <span class="f-label" id="lbl-group">Grupa wiekowa</span>
+      <div class="chips" id="f-group" role="group" aria-labelledby="lbl-group"></div>
+    </div>
+    <div class="f-row">
+      <span class="f-label" id="lbl-cat">Temat (można zaznaczyć kilka)</span>
+      <div class="chips" id="f-cat" role="group" aria-labelledby="lbl-cat"></div>
+    </div>
+    <div class="f-grid">
+      <div class="f-row">
+        <span class="f-label" id="lbl-cost">Koszt (można zaznaczyć kilka)</span>
+        <div class="chips" id="f-cost" role="group" aria-labelledby="lbl-cost"></div>
+      </div>
+      <div class="f-row">
+        <span class="f-label" id="lbl-lang">Język serwisu</span>
+        <div class="chips" id="f-lang" role="group" aria-labelledby="lbl-lang"></div>
+      </div>
+      <div class="f-row">
+        <span class="f-label" id="lbl-ver">Weryfikacja</span>
+        <div class="chips" id="f-ver" role="group" aria-labelledby="lbl-ver"></div>
+      </div>
+    </div>
+    <p class="count" id="count" aria-live="polite"></p>
+  </section>
+
+  <div id="groups"></div>
+  <p class="empty" id="empty" hidden>Żadna strona nie spełnia wybranych filtrów. Zmień wybór albo wyczyść filtry.</p>
+
+  <p class="foot">Przedziały wiekowe są orientacyjne. Wiele serwisów można czytać „piętro wyżej”, jeśli dziecko jest ciekawe i ma wsparcie dorosłego.</p>
+</main>
+<footer class="wrap" aria-label="Informacje o stronie" style="padding-top:16px;padding-bottom:24px;border-top:1px solid var(--line);color:var(--muted);font-size:14px">Wersja strony: 1.0 · Data publikacji: <time datetime="2026-10-20">20.10.2026</time> · Autor: R.O.</footer>
+
+
+<script>
+(function () {
+  var GROUPS = [
+    { id: 1, name: "Klasy 1–4", age: "szkoła podstawowa · ok. 7–10 lat",
+      lead: "Programowanie blokowe, krótkie zadania i dużo zabawy. Python i SQL jako osobne tematy pojawiają się później, tu fundamentem jest Scratch i myślenie algorytmiczne. Arkusz kalkulacyjny tylko jako proste ćwiczenie razem z dorosłym.",
+      path: "ScratchJr → Scratch → Klub Młodego Programisty (gov.pl/koduj)." },
+    { id: 2, name: "Klasy 5–8", age: "szkoła podstawowa · ok. 11–15 lat",
+      lead: "Przejście ze Scratcha do tekstowego Pythona, pierwsze zapytania SQL i pierwsze poważniejsze arkusze z formułami i wykresami. Najlepiej uczyć się na własnych projektach: grze, quizie, kalkulatorze.",
+      path: "Scratch → micro:bit lub Raspberry Pi Foundation (Python) → ZPE (informatyka) → pierwsze zapytania SQL." },
+    { id: 3, name: "Liceum i technikum", age: "klasy 1–3 · ok. 15–19 lat",
+      lead: "Umiejętności potrzebne do matury z informatyki (Python, SQL, arkusz kalkulacyjny) i pierwszy kontakt z analizą danych. Warto łączyć polskie materiały pod maturę z angielskimi kursami interaktywnymi.",
+      path: "ZPE + CKE (matura) → Kaggle Learn → CS50P → praktyka na Codewars i w projektach." },
+    { id: 4, name: "Zawodowo", age: "dla osób, które chcą programować profesjonalnie",
+      lead: "Praktyka na prawdziwych danych, portfolio, certyfikaty uznawane przez pracodawców, społeczności i konkursy. Przy zmianie zawodu przydają się też płatne ścieżki z mentorem.",
+      path: "SQL (Mode, DataLemur) + Python i pandas (Kaggle, Real Python) + certyfikat (IBM, Google, Microsoft, Python Institute) + portfolio na GitHubie i Kaggle." }
+  ];
+  var CATS = { blok: "Programowanie blokowe", python: "Python", sql: "SQL", dane: "Analiza danych", arkusz: "Arkusz kalkulacyjny", org: "Organizacje i szkoły" };
+  var COSTS = { free: "Bezpłatne", freemium: "Freemium", paid: "Płatne" };
+
+  var D = [];
+  // E(grupa, temat, nazwa, adres lub lista adresów, koszt, język, opis, sprawdzone, wiek)
+  function E(g, c, n, u, k, l, d, v, a) { D.push({ g: g, c: c, n: n, u: [].concat(u), k: k, l: l, d: d, v: !!v, a: a || "" }); }
+
+  /* ---------- Grupa 1: klasy 1–4 ---------- */
+  E(1,"blok","ScratchJr","https://www.scratchjr.org","free","PL/EN","Aplikacja na tablet i Chromebook, własne historie i animacje. Rozwija ją Scratch Foundation.",1,"5–7 lat");
+  E(1,"blok","Scratch","https://scratch.mit.edu","free","PL","Najważniejszy punkt startu, w przeglądarce, z ogromną społecznością projektów.",1,"8+");
+  E(1,"blok","Klub Młodego Programisty (Scratch Junior i Scratch 3.0)","https://www.gov.pl/web/koduj","free","PL","Polskie kursy w modułach, ze słowniczkiem i poradnikiem dla nauczyciela. Prowadzi je Ministerstwo Cyfryzacji.",1,"5–9 (Junior), 9–12 (Scratch 3.0)");
+  E(1,"blok","Code.org (Godzina Kodowania)","https://code.org","free","PL/EN","Gotowe kursy dla klas wczesnoszkolnych, część po polsku.",0,"5–10 lat");
+  E(1,"blok","Hour of Code","https://hourofcode.com","free","PL/EN","Krótkie, jednogodzinne zadania na start.",0,"5+");
+  E(1,"blok","Blockly Games","https://blockly.games","free","PL/EN","Gry logiczne prowadzące od klocków do prawdziwego kodu.",0,"8+");
+  E(1,"blok","Lightbot","https://lightbot.com","freemium","PL/EN","Układanie instrukcji dla robota: pętle i procedury.",0,"6+");
+  E(1,"blok","Kodable","https://www.kodable.com","freemium","EN","Programowanie logiczne w formie gry.",0,"5–10 lat");
+  E(1,"blok","Raspberry Pi Foundation – projekty","https://projects.raspberrypi.org","free","EN (część PL)","Projekty krok po kroku w Scratchu. Fundacja prowadzi też darmowe kursy dla nauczycieli klas 1–6.",1,"7+");
+  E(1,"arkusz","Zintegrowana Platforma Edukacyjna","https://zpe.gov.pl","free","PL","Polskie e-materiały zgodne z podstawą programową, w tym informatyka dla szkoły podstawowej (wyszukaj po przedmiocie i etapie).",1);
+  E(1,"arkusz","Arkusze Google","https://docs.google.com/spreadsheets","free","PL","Najprostszy sposób, żeby wspólnie z rodzicem zrobić pierwszą tabelkę i wykres.",0);
+  E(1,"org","Fundacja Orange – #SuperKoderzy","https://fundacja.orange.pl",null,"PL","Programowanie dla szkół i nauczycieli, w tym lekcje dla klas 1–3, oraz warsztaty i materiały dla dzieci.",1);
+  E(1,"org","Stowarzyszenie Mistrzowie Kodowania","https://mistrzowiekodowania.pl",null,"PL","Program „Zaprogramuj Przyszłość” i zajęcia z programowania dla najmłodszych (współpraca z Fundacją Orange potwierdzona, adres strony do sprawdzenia).",0);
+  E(1,"org","Europejski Tydzień Kodowania","https://codeweek.eu",null,"PL/EN","Mapa wydarzeń i pomysły na zajęcia, można zgłosić własną inicjatywę.",1);
+  E(1,"org","Scratch Foundation","https://www.scratchfoundation.org",null,"EN","Organizacja stojąca za ScratchJr i Scratchem.",0);
+  E(1,"org","Informatyczny Konkurs „Bóbr”","https://bobr.edu.pl",null,"PL","Konkurs myślenia algorytmicznego, od najmłodszych klas.",0);
+
+  /* ---------- Grupa 2: klasy 5–8 ---------- */
+  E(2,"python","Raspberry Pi: ze Scratcha do Pythona (kurs dla nauczycieli)","https://www.raspberrypi.org/courses/learn-scratch","free","EN","Pokazuje, jak przenieść umiejętności ze Scratcha do tekstowych języków.",1);
+  E(2,"python","Raspberry Pi Foundation – projekty","https://projects.raspberrypi.org","free","EN (część PL)","Ścieżki projektów w Pythonie i Scratchu, krok po kroku.",0);
+  E(2,"python","micro:bit – edytor Pythona","https://python.microbit.org","free","EN (część PL)","Python w świecie fizycznym (płytka micro:bit), wiek 11–14. Przewodnik: microbit.org/guide/python.",1,"11–14 lat");
+  E(2,"blok","micro:bit – MakeCode","https://makecode.microbit.org","free","PL/EN","Wersja blokowa, dobra na przejście do tekstu.",1);
+  E(2,"python","Trinket","https://trinket.io","freemium","EN","Python w przeglądarce, bez instalacji.",0);
+  E(2,"python","CodeCombat","https://codecombat.com","freemium","EN (część PL)","Nauka Pythona przez grę fabularną.",0);
+  E(2,"python","Code.org","https://code.org","free","PL/EN","Kursy dla klas 5–8, w tym tworzenie aplikacji.",0);
+  E(2,"python","Python – oficjalny tutorial po polsku","https://docs.python.org/pl/3/tutorial/","free","PL","Dla bardziej zaawansowanych uczniów, jako lektura uzupełniająca.",0);
+  E(2,"sql","Khan Academy – Intro to SQL","https://www.khanacademy.org/computing/computer-programming/sql","free","EN (napisy, część PL)","Łagodne wejście w bazy danych i zapytania.",0);
+  E(2,"sql","SQL Murder Mystery","https://mystery.knightlab.com","free","EN","Rozwiązywanie zagadki kryminalnej zapytaniami SQL, dla ambitnych uczniów 7–8 klas.",0);
+  E(2,"arkusz","Zintegrowana Platforma Edukacyjna","https://zpe.gov.pl","free","PL","E-materiały z informatyki, w tym arkusz kalkulacyjny, zgodne z podstawą programową.",1);
+  E(2,"arkusz","Arkusze Google – pomoc","https://support.google.com/docs","free","PL","Oficjalne instrukcje i szablony.",0);
+  E(2,"arkusz","Microsoft Excel – szkolenia","https://support.microsoft.com/pl-pl/excel","free","PL","Oficjalne tutoriale wideo i artykuły dla początkujących.",0);
+  E(2,"org","Fundacja Orange – #SuperKoderzy i Pracownie Orange","https://fundacja.orange.pl",null,"PL","Program w szkołach dla klas 4–8, warsztaty i webinary dla dzieci.",1);
+  E(2,"org","Fundacja Perspektywy – IT for SHE Kids","https://perspektywy.org",null,"PL","Warsztaty programowania i robotyki dla uczniów klas IV–VIII, prowadzone przez studentki kierunków IT.",1);
+  E(2,"org","Informatyczny Konkurs „Bóbr”","https://bobr.edu.pl",null,"PL","Konkurs myślenia algorytmicznego i informatycznego.",0);
+  E(2,"org","Olimpiada Informatyczna Juniorów","https://oij.edu.pl",null,"PL","Konkurs algorytmiczny dla uczniów starszych klas szkoły podstawowej.",0);
+  E(2,"org","Europejski Tydzień Kodowania","https://codeweek.eu",null,"PL/EN","Wydarzenia, materiały, konkursy.",1);
+  E(2,"org","Micro:bit Educational Foundation","https://microbit.org",null,"EN","Zasoby dla nauczycieli, pomysły na lekcje.",1);
+
+  /* ---------- Grupa 3: liceum i technikum ---------- */
+  E(3,"python","Python – dokumentacja i tutorial","https://docs.python.org/pl/3/","free","PL","Źródło wiedzy, polskie tłumaczenie.",0);
+  E(3,"python","CS50P – Harvard (Python)","https://cs50.harvard.edu/python","free","EN","Pełny kurs Pythona z zadaniami, certyfikat płatny.",0);
+  E(3,"python","Codecademy – Learn Python","https://www.codecademy.com","freemium","EN","Interaktywne ćwiczenia w przeglądarce.",1);
+  E(3,"python","freeCodeCamp","https://www.freecodecamp.org","free","EN","Kursy Pythona i analizy danych z projektami i darmowym certyfikatem.",1);
+  E(3,"python","Python Tutor","https://pythontutor.com","free","EN","Wizualizacja wykonywania kodu krok po kroku, świetna do nauki algorytmów.",0);
+  E(3,"python","Exercism","https://exercism.org","free","EN","Ćwiczenia z mentorami.",0);
+  E(3,"python","Codewars","https://www.codewars.com","free","EN","Małe zadania (kata), dobre do codziennej praktyki.",0);
+  E(3,"python","Advent of Code","https://adventofcode.com","free","EN","Zadania algorytmiczne co roku w grudniu.",0);
+  E(3,"python","Zintegrowana Platforma Edukacyjna","https://zpe.gov.pl","free","PL","E-materiały z informatyki dla liceum i technikum, w tym połączenie Pythona z bazami danych SQLite.",1);
+  E(3,"sql","Zintegrowana Platforma Edukacyjna","https://zpe.gov.pl","free","PL","Polskie lekcje SQL (zapytania, grupowanie, definiowanie schematu), zgodne z podstawą programową.",1);
+  E(3,"sql","SQLZoo","https://sqlzoo.net","free","EN","Jedna z najstarszych stron do ćwiczeń SQL.",1);
+  E(3,"sql","SQLBolt","https://sqlbolt.com","free","EN","Krótkie lekcje z ćwiczeniami.",0);
+  E(3,"sql","Kaggle Learn – Intro to SQL","https://www.kaggle.com/learn","free","EN","Ćwiczenia na prawdziwych zbiorach danych, z certyfikatem.",1);
+  E(3,"sql","W3Schools – SQL","https://www.w3schools.com/sql","free","EN","Szybka ściągawka z edytorem online.",0);
+  E(3,"sql","Codecademy – Learn SQL","https://www.codecademy.com","freemium","EN","Interaktywnie od pierwszej minuty.",1);
+  E(3,"dane","Kaggle Learn","https://www.kaggle.com/learn","free","EN","Pandas, wizualizacja danych, Python: krótkie moduły.",1);
+  E(3,"dane","freeCodeCamp – Data Analysis with Python","https://www.freecodecamp.org","free","EN","Pandas, NumPy, wizualizacje.",1);
+  E(3,"dane","Google Colab","https://colab.research.google.com","free","PL/EN","Notatniki Jupyter w przeglądarce, bez instalacji.",0);
+  E(3,"arkusz","CKE – arkusze maturalne","https://cke.gov.pl","free","PL","Wzory arkuszy i zadań z informatyki (arkusz kalkulacyjny, bazy danych, programowanie).",0);
+  E(3,"arkusz","Microsoft Excel – szkolenia","https://support.microsoft.com/pl-pl/excel","free","PL","Oficjalne materiały.",0);
+  E(3,"arkusz","Arkusze Google – pomoc","https://support.google.com/docs","free","PL","Funkcje, tabele przestawne, skrypty.",0);
+  E(3,"arkusz","ExcelJet","https://exceljet.net","free","EN","Przejrzysty słownik funkcji z przykładami.",0);
+  E(3,"org","Olimpiada Informatyczna","https://oi.edu.pl",null,"PL","Najważniejszy konkurs algorytmiczny dla uczniów szkół średnich.",0);
+  E(3,"org","Olimpiada Informatyczna Juniorów","https://oij.edu.pl",null,"PL","Dla młodszych uczniów, dobry trening przed OI.",0);
+  E(3,"org","Fundacja Perspektywy","https://perspektywy.org",null,"PL","Programy dla dziewcząt i młodzieży w obszarze IT.",1);
+  E(3,"org","Fundacja Orange – Pracownie Orange","https://fundacja.orange.pl",null,"PL","Zajęcia i warsztaty w lokalnych Pracowniach Orange.",1);
+  E(3,"org","Raspberry Pi Foundation","https://www.raspberrypi.org",null,"EN","Darmowe kursy komputerowe i projekty.",1);
+  E(3,"org","Europejski Tydzień Kodowania","https://codeweek.eu",null,"PL/EN","Wydarzenia i materiały także dla młodzieży.",1);
+
+  /* ---------- Grupa 4: zawodowo ---------- */
+  E(4,"python","Python.org – dokumentacja","https://docs.python.org","free","EN (część PL)","Punkt odniesienia dla wszystkich.",0);
+  E(4,"python","Real Python","https://realpython.com","freemium","EN","Szczegółowe poradniki praktyczne.",0);
+  E(4,"python","CS50 – Harvard","https://cs50.harvard.edu/x","free","EN","Fundamenty informatyki, a do tego CS50P (Python) i CS50 SQL.",0);
+  E(4,"python","freeCodeCamp","https://www.freecodecamp.org","free","EN","Certyfikaty w ścieżce analizy danych.",1);
+  E(4,"python","Exercism","https://exercism.org","free","EN","Codzienna praktyka z mentorami.",0);
+  E(4,"python","Codewars","https://www.codewars.com","free","EN","Codzienna praktyka, małe zadania.",0);
+  E(4,"python","LeetCode i HackerRank",["https://leetcode.com","https://www.hackerrank.com"],"freemium","EN","Przygotowanie do rozmów rekrutacyjnych.",1);
+  E(4,"python","Python Institute","https://pythoninstitute.org","freemium","EN","Certyfikaty PCEP, PCAP, PCPP. Egzaminy płatne, darmowe kursy w Cisco Networking Academy.",0);
+  E(4,"sql","Kaggle Learn","https://www.kaggle.com/learn","free","EN","Od podstaw po średnio zaawansowany poziom.",1);
+  E(4,"sql","SQLZoo","https://sqlzoo.net","free","EN","Ćwiczenia w wielu dialektach.",1);
+  E(4,"sql","Mode – SQL Tutorial","https://mode.com/sql-tutorial","free","EN","Skupia się na analityce biznesowej.",0);
+  E(4,"sql","DataLemur","https://datalemur.com","freemium","EN","Zadania w stylu rozmów rekrutacyjnych.",1);
+  E(4,"sql","LeetCode i HackerRank",["https://leetcode.com","https://www.hackerrank.com"],"freemium","EN","Zaawansowane zapytania.",1);
+  E(4,"sql","Dokumentacja PostgreSQL","https://www.postgresql.org/docs","free","EN","Standard branżowy.",0);
+  E(4,"sql","Oracle Live SQL","https://livesql.oracle.com","free","EN","Przydatne do testów składni Oracle (wymaga darmowego konta).",1);
+  E(4,"dane","IBM Data Analyst – Professional Certificate","https://www.coursera.org","paid","EN","Excel, SQL, Python, dashboardy. 4–6 miesięcy w trybie części czasu.",1);
+  E(4,"dane","Google Data Analytics Certificate","https://www.coursera.org","paid","EN","Popularna ścieżka dla zmieniających zawód.",0);
+  E(4,"dane","DataCamp","https://www.datacamp.com","freemium","EN","Ścieżki Python, SQL i R dla analityków.",0);
+  E(4,"dane","Dataquest","https://www.dataquest.io","freemium","EN","Nauka na projektach z danymi.",0);
+  E(4,"dane","Kaggle – konkursy i zbiory danych","https://www.kaggle.com","free","EN","Portfolio, konkursy, notatniki innych osób.",1);
+  E(4,"dane","Dokumentacja pandas","https://pandas.pydata.org/docs","free","EN","Najważniejsza biblioteka do analizy danych.",0);
+  E(4,"dane","Jupyter","https://jupyter.org","free","EN","Standardowe środowisko pracy analityka.",0);
+  E(4,"arkusz","Microsoft Learn","https://learn.microsoft.com","free","PL/EN","Excel, Power Query, Power BI. Przygotowanie do certyfikatu PL-300 (Power BI Data Analyst).",0);
+  E(4,"arkusz","ExcelJet","https://exceljet.net","free","EN","Funkcje, formuły tablicowe, praktyczne przykłady.",0);
+  E(4,"arkusz","Chandoo.org","https://chandoo.org","free","EN","Dashboardy i zaawansowane techniki w Excelu.",0);
+  E(4,"arkusz","Google Apps Script","https://developers.google.com/apps-script","free","EN","Automatyzacja Arkuszy Google.",0);
+  E(4,"org","Software Development Academy","https://sdacademy.pl","paid","PL","Kursy Python, testowanie, analiza danych.",0);
+  E(4,"org","Infoshare Academy","https://infoshareacademy.com","paid","PL","Bootcampy programistyczne.",0);
+  E(4,"org","Coders Lab","https://coderslab.pl","paid","PL","Kursy i bootcampy.",0);
+  E(4,"org","Kodilla","https://kodilla.com","paid","PL","Bootcamp z możliwością płatności po zatrudnieniu (sprawdź aktualne zasady).",0);
+  E(4,"org","Python Software Foundation","https://www.python.org/psf-landing",null,"EN","Organizacja stojąca za Pythonem, granty, społeczność.",0);
+  E(4,"org","PyCon PL","https://pl.pycon.org",null,"PL","Polska konferencja Pythona, dobra okazja na kontakty.",0);
+  E(4,"org","Kaggle","https://www.kaggle.com",null,"EN","Społeczność analityków danych.",1);
+  E(4,"org","Raspberry Pi Foundation","https://www.raspberrypi.org",null,"EN","Kursy dla przyszłych nauczycieli informatyki.",1);
+  E(4,"org","Fundacja Perspektywy","https://perspektywy.org",null,"PL","Programy wspierające kobiety w IT.",1);
+
+  D.forEach(function (x) { x.pl = /PL/.test(x.l); });
+
+  var S = { q: "", g: 0, c: {}, k: {}, lang: "all", ver: false };
+  var $ = function (id) { return document.getElementById(id); };
+
+  function chip(label, pressed, onclick) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.textContent = label;
+    b.setAttribute("aria-pressed", pressed ? "true" : "false");
+    b.addEventListener("click", onclick);
+    return b;
+  }
+  function fillChips(id, defs) {
+    var box = $(id); box.textContent = "";
+    defs.forEach(function (d) { box.appendChild(chip(d.label, d.on, d.fn)); });
+  }
+
+  function buildFilters() {
+    fillChips("f-group", [{ label: "Wszystkie", on: S.g === 0, fn: function () { S.g = 0; update(); } }].concat(
+      GROUPS.map(function (g) { return { label: g.name, on: S.g === g.id, fn: function () { S.g = g.id; update(); } }; })));
+    fillChips("f-cat", Object.keys(CATS).map(function (k) {
+      return { label: CATS[k], on: !!S.c[k], fn: function () { S.c[k] = !S.c[k]; update(); } };
+    }));
+    fillChips("f-cost", Object.keys(COSTS).map(function (k) {
+      return { label: COSTS[k], on: !!S.k[k], fn: function () { S.k[k] = !S.k[k]; update(); } };
+    }));
+    fillChips("f-lang", [
+      { label: "Wszystkie", on: S.lang === "all", fn: function () { S.lang = "all"; update(); } },
+      { label: "Dostępne po polsku", on: S.lang === "pl", fn: function () { S.lang = "pl"; update(); } },
+      { label: "Tylko angielski", on: S.lang === "en", fn: function () { S.lang = "en"; update(); } }
+    ]);
+    fillChips("f-ver", [
+      { label: "Wszystkie", on: !S.ver, fn: function () { S.ver = false; update(); } },
+      { label: "✔ Tylko sprawdzone", on: S.ver, fn: function () { S.ver = true; update(); } }
+    ]);
+  }
+
+  function matches(x) {
+    if (S.g && x.g !== S.g) return false;
+    var cs = Object.keys(S.c).filter(function (k) { return S.c[k]; });
+    if (cs.length && cs.indexOf(x.c) < 0) return false;
+    var ks = Object.keys(S.k).filter(function (k) { return S.k[k]; });
+    if (ks.length && (!x.k || ks.indexOf(x.k) < 0)) return false;
+    if (S.lang === "pl" && !x.pl) return false;
+    if (S.lang === "en" && x.pl) return false;
+    if (S.ver && !x.v) return false;
+    if (S.q) {
+      var hay = (x.n + " " + x.d + " " + x.u.join(" ") + " " + CATS[x.c] + " " + x.a).toLowerCase();
+      var parts = S.q.toLowerCase().split(/\s+/).filter(Boolean);
+      for (var i = 0; i < parts.length; i++) if (hay.indexOf(parts[i]) < 0) return false;
+    }
+    return true;
+  }
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  function renderItem(x) {
+    var li = el("li", "item");
+    var top = el("div", "i-top");
+    var name = el("span", "i-name");
+    var a = el("a", null, x.n); a.href = x.u[0]; a.target = "_blank"; a.rel = "noopener";
+    name.appendChild(a);
+    top.appendChild(name);
+    if (x.v) top.appendChild(el("span", "i-ok", "✔ Sprawdzone"));
+    li.appendChild(top);
+    var urls = el("div", "i-url");
+    x.u.forEach(function (u, i) {
+      if (i) urls.appendChild(document.createTextNode(" · "));
+      urls.appendChild(document.createTextNode(u.replace(/^https?:\/\//, "").replace(/\/$/, "")));
+    });
+    li.appendChild(urls);
+    li.appendChild(el("p", "i-desc", x.d));
+    var tags = el("div", "tags");
+    tags.appendChild(el("span", "tag", CATS[x.c]));
+    if (x.k) tags.appendChild(el("span", "tag plain " + x.k, COSTS[x.k]));
+    tags.appendChild(el("span", "tag plain", x.l));
+    if (x.a) tags.appendChild(el("span", "tag plain", "wiek: " + x.a));
+    li.appendChild(tags);
+    return li;
+  }
+
+  function update() {
+    buildFilters();
+    var box = $("groups"); box.textContent = "";
+    var shown = 0;
+    GROUPS.forEach(function (g) {
+      var items = D.filter(function (x) { return x.g === g.id && matches(x); });
+      if (!items.length) return;
+      shown += items.length;
+      var total = D.filter(function (x) { return x.g === g.id; }).length;
+      var sec = el("section", "group"); sec.id = "grupa-" + g.id;
+      var head = el("div", "g-head");
+      head.appendChild(el("h2", null, g.name));
+      head.appendChild(el("span", "g-age", g.age));
+      head.appendChild(el("span", "g-n", items.length + " z " + total));
+      sec.appendChild(head);
+      sec.appendChild(el("p", "g-lead", g.lead));
+      var ul = el("ul", "list");
+      items.forEach(function (x) { ul.appendChild(renderItem(x)); });
+      sec.appendChild(ul);
+      var p = el("p", "path"); p.appendChild(el("b", null, "Ścieżka")); p.appendChild(document.createTextNode(g.path));
+      sec.appendChild(p);
+      box.appendChild(sec);
+    });
+    $("empty").hidden = shown > 0;
+    $("count").innerHTML = "Wyświetlono <strong>" + shown + "</strong> z <strong>" + D.length + "</strong> pozycji.";
+  }
+
+  $("q").addEventListener("input", function (e) { S.q = e.target.value.trim(); update(); });
+  $("reset").addEventListener("click", function () {
+    S = { q: "", g: 0, c: {}, k: {}, lang: "all", ver: false };
+    $("q").value = ""; update();
+  });
+  update();
+})();
+</script>
+
+</body></html>
