@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Łatwy test z systemów operacyjnych, sieci, infrastruktury i Internetu. 20 pytań dla szkoły średniej.">
 <title>Systemy i sieci — test wiedzy</title>
 <style>
@@ -26,9 +26,11 @@ fieldset{min-width:0;border:0;margin:0 0 24px;padding:0}legend{font-weight:700;f
 </form>
 <section class="card result" id="result" hidden tabindex="-1" aria-labelledby="resultTitle"><span class="eyebrow" style="color:var(--green)">Test ukończony</span><h2 id="resultTitle">Twój wynik</h2><p id="studentSummary"></p><div class="stats"><div><strong id="points"></strong><span>punkty z 20</span></div><div><strong id="percent"></strong><span>poprawne odpowiedzi</span></div><div><strong id="grade"></strong><span>ocena</span></div></div>
 <p>Odpowiedzi są teraz zablokowane. Pod każdym pytaniem znajdziesz poprawną odpowiedź z wyjaśnieniem, a poniżej pełny klucz.</p>
-<div class="actions"><button type="button" id="send">Wyślij wynik do nauczyciela</button><button type="button" class="secondary" id="download">Pobierz podsumowanie TXT</button><button type="button" class="secondary" id="print">Drukuj wynik i odpowiedzi</button></div>
+<div class="actions"><button type="submit" id="send" form="fallbackForm">Wyślij wynik do nauczyciela</button><button type="button" class="secondary" id="download">Pobierz podsumowanie TXT</button><button type="button" class="secondary" id="print">Drukuj wynik i odpowiedzi</button></div>
+<p class="small">Wysyłka otworzy FormSubmit w nowej karcie. Dokończ ewentualną weryfikację i poczekaj na potwierdzenie serwisu. Wynik pozostanie tutaj.</p>
 <p class="status" id="mailStatus" role="status" aria-live="polite">Wynik nie został jeszcze wysłany.</p>
-<form id="fallbackForm" method="POST" action="https://formsubmit.co/rafal.edu@outlook.com" target="_blank" rel="noopener" hidden><div id="fallbackFields"></div><button class="secondary" type="submit">Otwórz wysyłkę standardową</button><p class="small">Otwiera FormSubmit w nowej karcie. Przed ponowną wysyłką sprawdź z nauczycielem, czy poprzednia próba dotarła.</p></form>
+<form id="fallbackForm" method="POST" action="https://formsubmit.co/rafal.edu@outlook.com" target="_blank" rel="noopener"><div id="fallbackFields"></div></form>
+<div id="retryArea" hidden><p class="small">Jeśli nowa karta się nie pojawiła, sprawdź blokowanie wyskakujących okien. Jeśli FormSubmit wyświetlił błąd, zachowaj podsumowanie TXT. Ponów tylko wtedy, gdy poprzednia próba nie została przyjęta.</p><button type="button" class="secondary" id="retry">Odblokuj ponowną próbę</button></div>
 <details><summary>Podsumowanie do zachowania</summary><pre id="report" class="report"></pre></details>
 <details id="answerKey"><summary>Klucz odpowiedzi — wszystkie 20 pytań</summary><div id="keyContent"></div></details>
 </section>
@@ -36,7 +38,7 @@ fieldset{min-width:0;border:0;margin:0 0 24px;padding:0}legend{font-weight:700;f
 <form id="activateForm" action="https://formsubmit.co/rafal.edu@outlook.com" method="POST" target="_blank" rel="noopener">
 <input type="hidden" name="_subject" value="[TEST TECHNICZNY] Systemy i sieci — aktywacja formularza"><input type="hidden" name="_template" value="table"><input type="hidden" name="Imię i nazwisko" value="TEST TECHNICZNY — nie jest wynikiem ucznia"><input type="hidden" name="Klasa" value="TEST"><input type="hidden" name="Liczba punktów" value="20 / 20"><input type="hidden" name="Procent" value="100%"><input type="hidden" name="Ocena" value="6"><input type="hidden" name="Informacja" value="Wiadomość kontrolna formularza; nie wpisywać do dziennika."><input type="hidden" name="_url" value="https://entropia23.github.io/pracownia-writer/test-systemy-sieci.html"><button type="submit" class="secondary">Activate Form</button></form>
 <p class="small notice">Test działa w pojedynczym pliku HTML. Klucz jest ukryty w interfejsie do ukończenia próby, ale może zostać odczytany z kodu strony. Wynik jest liczony w przeglądarce; nie jest to system egzaminacyjny z weryfikacją po stronie serwera.</p></details>
-<footer><strong>Materiały źródłowe:</strong> „Systemy operacyjne — 45 min”, „Komunikacja w sieci lokalnej i Internecie”, „Nowe technologie i oprogramowanie”. Zakres: 8 pytań o systemy, 10 o sieci i Internet, 2 o chmurę. Wersja 1.0 / 12.10.2026.</footer>
+<footer><strong>Materiały źródłowe:</strong> „Systemy operacyjne — 45 min”, „Komunikacja w sieci lokalnej i Internecie”, „Nowe technologie i oprogramowanie”. Zakres: 8 pytań o systemy, 10 o sieci i Internet, 2 o chmurę. Wersja 1.1 / 22.10.2026.</footer>
 </main>
 <script>
 "use strict";
@@ -44,7 +46,7 @@ const QUESTIONS = [["Systemy operacyjne","Jakie jest podstawowe zadanie systemu 
 const PUBLIC_URL="https://entropia23.github.io/pracownia-writer/test-systemy-sieci.html";
 const $=id=>document.getElementById(id);
 const letters=["A","B","C","D"];
-let completed=false, sending=false, sent=false, reportData=null;
+let completed=false, sending=false, reportData=null;
 function escapeHTML(value){return String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function gradeFor(score){return score===20?6:score>=17?5:score>=14?4:score>=10?3:score>=6?2:1;}
 function getAnswers(){return QUESTIONS.map((q,i)=>{const el=document.querySelector('input[name="q'+i+'"]:checked');return el?Number(el.value):null;});}
@@ -71,27 +73,24 @@ $("report").textContent=reportText();prepareFallback();$("result").hidden=false;
 function reportText(){const r=reportData;return "TEST: Systemy operacyjne, sieci, infrastruktura i Internet\nImię i nazwisko: "+r.name+"\nKlasa: "+r.group+"\nLiczba punktów: "+r.score+" / 20\nProcent: "+r.percent+"%\nOcena: "+r.grade+"\nData (Warszawa): "+r.date+"\nID próby: "+r.id+"\nOdpowiedzi: "+r.answers.map((a,i)=>(i+1)+":"+letters[a]).join(", ")+"\nŹródło: "+PUBLIC_URL;}
 function payload(){const r=reportData;return {"_subject":"Wynik testu — systemy i sieci — "+r.group,"_template":"table","_url":PUBLIC_URL,"Imię i nazwisko":r.name,"Klasa":r.group,"Liczba punktów":r.score+" / 20","Procent":r.percent+"%","Ocena":String(r.grade),"ID próby":r.id,"Data (Warszawa)":r.date,"Odpowiedzi":r.answers.map((a,i)=>(i+1)+":"+letters[a]).join(", ")};}
 function prepareFallback(){const wrap=$("fallbackFields");wrap.replaceChildren();Object.entries(payload()).forEach(([name,value])=>{const input=document.createElement("input");input.type="hidden";input.name=name;input.value=value;wrap.appendChild(input);});}
-async function sendResult(){
-if(!completed||!reportData||sending||sent)return;
-sending=true;$("send").disabled=true;$("mailStatus").textContent="Przesyłanie podsumowania do FormSubmit…";
-const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);
-try{
-const response=await fetch("https://formsubmit.co/ajax/rafal.edu@outlook.com",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(payload()),signal:controller.signal});
-const data=await response.json();
-if(!response.ok||!(data.success===true||data.success==="true"))throw new Error(typeof data.message==="string"?data.message:"Serwis nie potwierdził przyjęcia.");
-const message=String(data.message||"");
-if(/activat|confirm.*email|verify.*email/i.test(message)){$("mailStatus").textContent="FormSubmit wymaga potwierdzenia adresu. Nauczyciel powinien sprawdzić skrzynkę i aktywować formularz, a następnie ponowić wysyłkę."; $("fallbackForm").hidden=false;}
-else{sent=true;$("fallbackForm").hidden=true;$("send").textContent="Przekazano do FormSubmit";$("mailStatus").textContent="FormSubmit potwierdził przyjęcie zgłoszenia. Odbiór wiadomości na rafal.edu@outlook.com potwierdza nauczyciel w swojej skrzynce.";}
-}catch(error){$("mailStatus").textContent="Nie udało się potwierdzić wysyłki. "+(error.name==="AbortError"?"Upłynął czas oczekiwania.":String(error.message))+" Wynik pozostał na stronie — pobierz go lub użyj wysyłki standardowej. Przy błędzie sieci nie wiadomo, czy zgłoszenie dotarło; unikaj wielokrotnego wysyłania.";$("fallbackForm").hidden=false;}
-finally{clearTimeout(timer);sending=false;$("send").disabled=sent;}
+function sendResult(event){
+if(!completed||!reportData||sending){event.preventDefault();return;}
+prepareFallback();
+sending=true;
+$("send").disabled=true;
+$("send").textContent="Sprawdź kartę FormSubmit";
+$("retryArea").hidden=false;
+$("mailStatus").textContent="Rozpoczęto wysyłkę w nowej karcie. Dokończ ewentualną weryfikację i sprawdź potwierdzenie FormSubmit. Ta strona nie może odczytać odpowiedzi z drugiej karty. Wynik pozostaje dostępny do pobrania.";
 }
+
 render();
 $("quiz").addEventListener("change",updateProgress);
 $("quiz").addEventListener("submit",finishTest);
-$("send").addEventListener("click",sendResult);
+$("fallbackForm").addEventListener("submit",sendResult);
+$("retry").addEventListener("click",()=>{sending=false;$("send").disabled=false;$("send").textContent="Ponów wysyłkę do nauczyciela";$("retryArea").hidden=true;$("mailStatus").textContent="Ponowna próba odblokowana. Wyślij ponownie tylko wtedy, gdy poprzednia próba nie została przyjęta. ID wyniku pozostaje takie samo.";});
 $("download").addEventListener("click",()=>{if(!reportData)return;const blob=new Blob(["\uFEFF"+reportText()],{type:"text/plain;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="wynik-test-systemy-sieci.txt";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
 $("print").addEventListener("click",()=>window.print());
-$("fallbackForm").addEventListener("submit",()=>{$("mailStatus").textContent="Otwarto wysyłkę standardową w nowej karcie. Sprawdź komunikat FormSubmit; samo otwarcie karty nie potwierdza wysłania.";});
+
 </script>
 </body>
 </html>
