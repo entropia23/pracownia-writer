@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Klasa 3 LO — materiały</title>
+<style>
+/* Wspólny wygląd: nie kopiuj stylów przy dodawaniu lekcji. */
+*{box-sizing:border-box}body{margin:0;color:#292d45;background:#fff;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}header{background:#292d45;color:#fff}header div{max-width:960px;margin:auto;padding:20px 24px;font-weight:650}main{max-width:960px;margin:auto;padding:40px 24px 64px}h1{font-size:32px;line-height:1.25;margin:0 0 12px}h2{font-size:21px;line-height:1.4;font-weight:650;margin:0 0 16px}a{color:inherit;text-underline-offset:4px}.intro,.meta,.hint{color:#626674;font-size:14px}.intro{margin:0 0 28px}.search{margin-bottom:28px}.search label{display:block;font-weight:600;margin-bottom:8px}.search-row{display:flex;gap:10px}input{min-width:0;flex:1;padding:12px;border:1px solid #858995;border-radius:3px;font:inherit}button,.actions a{font:inherit;font-size:14px;border:1px solid #9599a4;border-radius:3px;padding:11px 16px;background:#fff;color:#292d45}button{cursor:pointer}.hint{margin:8px 0 0}.lesson{background:white}.lesson.shade{background:#f3f4f7}.lesson-body{padding:26px}.content{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:32px;align-items:start}.meta{margin:0 0 12px}.comment{margin:0}.actions{display:flex;flex-direction:column;gap:10px}.actions a{text-align:center;text-decoration:none}.actions a:hover{background:#e7e9ee}.actions button:disabled{color:#626674;border-color:#aeb2bc;cursor:default}.placeholder{font-size:12px;color:#626674;margin:0;text-align:center}hr{margin:0;border:0;border-top:1px solid #bfc3cd}#empty{padding:28px;background:#f3f4f7}footer{border-top:1px solid #d7dae1;padding:20px 24px;color:#626674;font-size:14px;text-align:center}:focus-visible{outline:3px solid #565fb2;outline-offset:3px}[hidden]{display:none!important}@media(max-width:600px){main{padding:28px 16px 40px}.lesson-body{padding:22px 18px}.content{grid-template-columns:1fr;gap:20px}.actions{align-items:stretch}h1{font-size:28px}}@media print{header,.search,.intro,.placeholder{display:none}.lesson{break-inside:avoid}.content{grid-template-columns:1fr}main{padding:0}.actions{flex-direction:row}}
+</style>
+<link rel="stylesheet" href="school.css"></head>
+<body>
+<header class="school-header"><div class="school-bar"><a class="school-brand" href="index.html">Informatyka · SP / LO</a><nav class="school-nav" aria-label="Menu główne"><a href="index.html">START</a><details class="class-menu"><summary>MATERIAŁY DLA KLAS</summary><ul><li><a href="materials_sp1-3.html">Klasy 1–3 SP</a></li><li><a href="materials_sp4.html">Klasa 4 SP</a></li><li><a href="materials_sp5.html">Klasa 5 SP</a></li><li><a href="materials_sp6.html">Klasa 6 SP</a></li><li><a href="materials_sp7.html">Klasa 7 SP</a></li><li><a href="materials_sp8.html">Klasa 8 SP</a></li><li><a href="materials_lo1.html">Klasa 1 LO</a></li><li><a href="materials_lo2.html">Klasa 2 LO</a></li><li><a href="materials_lo3.html">Klasa 3 LO</a></li></ul></details><a class="test-button" href="logowanie-testy-wzor.html">TESTY</a></nav></div></header>
+<main><a class="back-home" href="index.html">← Strona główna</a>
+<!-- NAZWA KLASY: zmień tutaj oraz w <title> na początku pliku. -->
+<h1>Klasa 3 LO</h1>
+<p class="intro">Materiały do zajęć.</p><p class="folder-pending">Materiały dla tej klasy zostaną uzupełnione.</p>
+<!-- Wyszukiwarka występuje tylko raz. Przeszukuje wyłącznie tytuły h2. -->
+<div class="search" hidden>
+<label for="lesson-search">Szukaj w tematach lekcji</label>
+<div class="search-row"><input id="lesson-search" type="search" placeholder="Wpisz słowo z tytułu…" aria-controls="lessons" autocomplete="off"><button id="clear" type="button">Wyczyść</button></div>
+<p class="hint" id="results" role="status" aria-live="polite" aria-atomic="true"></p>
+</div>
+<noscript><p>Wyszukiwanie wymaga JavaScript. Wszystkie lekcje są widoczne poniżej; można użyć Ctrl+F.</p></noscript>
+<div id="lessons">
+<!-- POCZĄTEK BLOKU LEKCJI DO KOPIOWANIA
+Zmień tytuł h2, wpisz datę w time (datetime=RRRR-MM-DD), dodaj opis i linki w actions.
+Usuń hidden po uzupełnieniu. Skopiuj całe article, aby dodać kolejną lekcję. -->
+<article class="lesson" hidden data-template="true"><div class="lesson-body"><h2>Temat lekcji</h2><div class="content"><div><p class="meta">Data publikacji: <time>Do uzupełnienia</time></p><p class="comment">Opcjonalny komentarz.</p></div><div class="actions"><!-- Przykład: <a href="ADRES-PDF" target="_blank" rel="noopener">Otwórz PDF ↗</a> --><!-- Przykład: <a href="ADRES-PDF" download>Pobierz PDF</a> --></div></div></div><hr></article>
+<!-- KONIEC BLOKU LEKCJI DO KOPIOWANIA -->
+<!-- TU DODAWAJ LEKCJE -->
+</div>
+<p id="empty" hidden>Brak lekcji pasujących do wyszukiwania. Wpisz inne słowo lub wyczyść pole.</p>
+</main>
+<footer class="school-footer">Informatyka · Szkoła podstawowa i liceum<br>Wersja 1.2 · <span aria-hidden="true">☀</span> Aktualizacja: <time datetime="2026-10-28">28.10.2026</time> · Autor: R.O. · <a href="https://szkolylodz.wordpress.com/">WordPress</a></footer>
+<script>
+/* MECHANIZM WYSZUKIWANIA — zostaw jeden raz na końcu strony.
+   Samodzielny HTML: działa lokalnie i na hostingu obsługującym JavaScript.
+   Bezpłatny WordPress.com usuwa własne skrypty; ten plik nie jest gotowym
+   blokiem do wklejenia do darmowego WordPressa. */
+const input = document.querySelector('#lesson-search');
+const lessons = [...document.querySelectorAll('#lessons .lesson:not([data-template])')];
+function normalizeTitle(value) {
+ return value.toLocaleLowerCase('pl').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l');
+}
+function matchesTitle(title, query) {
+ const words = normalizeTitle(query).trim().split(/\s+/).filter(Boolean);
+ return words.every(word => normalizeTitle(title).includes(word));
+}
+function filterLessons() {
+ let count = 0;
+ lessons.forEach(lesson => {
+  const match = matchesTitle(lesson.querySelector('h2').textContent, input.value);
+  lesson.hidden = !match;
+  if (match) { lesson.classList.toggle('shade', count % 2 === 1); count++; }
+ });
+ document.querySelector('#results').textContent = `Widoczne lekcje: ${count} z ${lessons.length}`;
+ document.querySelector('#empty').hidden = count !== 0 || lessons.length === 0;
+}
+input.addEventListener('input', filterLessons);
+document.querySelector('#clear').addEventListener('click', () => { input.value = ''; filterLessons(); input.focus(); });
+document.querySelector('.search').hidden = lessons.length === 0;
+filterLessons();
+</script>
+</body>
+</html>
