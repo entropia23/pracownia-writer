@@ -7,14 +7,14 @@
 <style>
 /* Wspólny wygląd: nie kopiuj stylów przy dodawaniu lekcji. */
 *{box-sizing:border-box}body{margin:0;color:#292d45;background:#fff;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}header{background:#292d45;color:#fff}header div{max-width:960px;margin:auto;padding:20px 24px;font-weight:650}main{max-width:960px;margin:auto;padding:40px 24px 64px}h1{font-size:32px;line-height:1.25;margin:0 0 12px}h2{font-size:21px;line-height:1.4;font-weight:650;margin:0 0 16px}a{color:inherit;text-underline-offset:4px}.intro,.meta,.hint{color:#626674;font-size:14px}.intro{margin:0 0 28px}.search{margin-bottom:28px}.search label{display:block;font-weight:600;margin-bottom:8px}.search-row{display:flex;gap:10px}input{min-width:0;flex:1;padding:12px;border:1px solid #858995;border-radius:3px;font:inherit}button,.actions a{font:inherit;font-size:14px;border:1px solid #9599a4;border-radius:3px;padding:11px 16px;background:#fff;color:#292d45}button{cursor:pointer}.hint{margin:8px 0 0}.lesson{background:white}.lesson.shade{background:#f3f4f7}.lesson-body{padding:26px}.content{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:32px;align-items:start}.meta{margin:0 0 12px}.comment{margin:0}.actions{display:flex;flex-direction:column;gap:10px}.actions a{text-align:center;text-decoration:none}.actions a:hover{background:#e7e9ee}.actions button:disabled{color:#626674;border-color:#aeb2bc;cursor:default}.placeholder{font-size:12px;color:#626674;margin:0;text-align:center}hr{margin:0;border:0;border-top:1px solid #bfc3cd}#empty{padding:28px;background:#f3f4f7}footer{border-top:1px solid #d7dae1;padding:20px 24px;color:#626674;font-size:14px;text-align:center}:focus-visible{outline:3px solid #565fb2;outline-offset:3px}[hidden]{display:none!important}@media(max-width:600px){main{padding:28px 16px 40px}.lesson-body{padding:22px 18px}.content{grid-template-columns:1fr;gap:20px}.actions{align-items:stretch}h1{font-size:28px}}@media print{header,.search,.intro,.placeholder{display:none}.lesson{break-inside:avoid}.content{grid-template-columns:1fr}main{padding:0}.actions{flex-direction:row}}
-</style>
+.material-section{border:1px solid #bfc3cd;margin:24px 0 36px;scroll-margin-top:24px}.section-title{font-size:28px;margin:0;padding:24px 26px;border-bottom:3px solid #292d45}.material-section .lesson,.material-section .lesson.shade{background:transparent}.lesson h2{overflow-wrap:anywhere}.section-links{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px}.section-links a{padding:10px 16px;border:1px solid #292d45;border-radius:3px;text-decoration:none}.section-links a:hover{background:#292d45;color:white}.comment{font-size:13px;overflow-wrap:anywhere}.content{grid-template-columns:minmax(0,1fr) 205px}@media(max-width:600px){.content{grid-template-columns:1fr}.section-title{padding:20px 18px;font-size:25px}} </style>
 <link rel="stylesheet" href="school.css"></head>
 <body>
 <header class="school-header"><div class="school-bar"><a class="school-brand" href="index.html">Informatyka · SP / LO</a><nav class="school-nav" aria-label="Menu główne"><a href="index.html">START</a><details class="class-menu"><summary>MATERIAŁY DLA KLAS</summary><ul><li><a href="materials_sp1-3.html">Klasy 1–3 SP</a></li><li><a href="materials_sp4.html">Klasa 4 SP</a></li><li><a href="materials_sp5.html">Klasa 5 SP</a></li><li><a href="materials_sp6.html">Klasa 6 SP</a></li><li><a href="materials_sp7.html">Klasa 7 SP</a></li><li><a href="materials_sp8.html">Klasa 8 SP</a></li><li><a href="materials_lo1.html">Klasa 1 LO</a></li><li><a href="materials_lo2.html">Klasa 2 LO</a></li><li><a href="materials_lo3.html">Klasa 3 LO</a></li></ul></details><a class="test-button" href="logowanie-testy-wzor.html">TESTY</a></nav></div></header>
 <main><a class="back-home" href="index.html">← Strona główna</a>
 <!-- NAZWA KLASY: zmień tutaj oraz w <title> na początku pliku. -->
 <h1>Klasa 8 SP</h1>
-<p class="intro">Materiały do zajęć.</p>
+<p class="intro">Materiały z folderu KL_8_SP. Przycisk otwiera plik na Dysku Google w nowej karcie; pobieranie jest dostępne w jego podglądzie.</p><nav class="section-links" aria-label="Działy materiałów"><a href="#arkusz">Arkusz kalkulacyjny</a><a href="#python">Python</a></nav>
 <!-- Wyszukiwarka występuje tylko raz. Przeszukuje wyłącznie tytuły h2. -->
 <div class="search" hidden>
 <label for="lesson-search">Szukaj w tematach lekcji</label>
@@ -23,88 +23,209 @@
 </div>
 <noscript><p>Wyszukiwanie wymaga JavaScript. Wszystkie lekcje są widoczne poniżej; można użyć Ctrl+F.</p></noscript>
 <div id="lessons">
-<!--
-DODAWANIE LEKCJI:
-1. Skopiuj cały fragment pomiędzy POCZĄTEK i KONIEC BLOKU LEKCJI, razem z <article> i </article>.
-2. Wklej go przed komentarzem TU DODAWAJ LEKCJE.
-3. Zmień temat w h2. Wyszukiwarka odczyta go automatycznie.
-4. Zmień datę w dwóch miejscach: datetime (RRRR-MM-DD) i tekst widoczny uczniowi.
-5. Opcjonalnie zmień lub usuń cały akapit <p class="comment">…</p>.
-6. Zastąp przyciski disabled prawdziwymi linkami według przykładu w pierwszej lekcji.
-7. Nie kopiuj nagłówka h1, wyszukiwarki, stylów ani skryptu.
-Kolory są nadawane automatycznie po uruchomieniu i po wyszukaniu.
-Dla widoku bez JavaScript ustaw co drugi article na class="lesson shade".
--->
-
-<!-- POCZĄTEK BLOKU LEKCJI DO KOPIOWANIA -->
-<article class="lesson">
- <div class="lesson-body">
-  <!-- TEMAT LEKCJI -->
-  <h2>1. Jak bezpiecznie korzystać z pracowni informatycznej</h2>
-  <div class="content">
-   <div>
-    <!-- DATA PUBLIKACJI: oba zapisy dotyczą tej samej daty. -->
-    <p class="meta">Data publikacji: <time datetime="2026-09-03">03.09.2026</time></p>
-    <!-- KOMENTARZ OPCJONALNY: możesz usunąć cały poniższy akapit. -->
-    <p class="comment">Jak bezpiecznie korzystać z pracowni informatycznej</p>
-   </div>
-   <!-- MATERIAŁY PO PRAWEJ: zastąp przyciski i notatkę poniżej takimi odnośnikami:
-   <a href="pliki/lekcja-1.pdf" target="_blank" rel="noopener">Otwórz PDF ↗</a>
-   <a href="pliki/lekcja-1.pdf" download>Pobierz PDF</a>
-   W href wpisz adres PDF z WordPressa albo ścieżkę do własnego pliku.
-   Dla OneDrive użyj linku udostępniania tylko do odczytu: uczeń otworzy podgląd,
-   a następnie wybierze Pobierz. Atrybut download nie gwarantuje pobrania
-   plików z innej domeny — decyduje także serwer i przeglądarka.
-   -->
-  </div>
- </div>
- <!-- LINIA ODDZIELAJĄCA: kopiuj razem z lekcją. -->
- <hr>
-</article>
-<!-- KONIEC BLOKU LEKCJI DO KOPIOWANIA -->
-
-
-
-
-<!-- POCZĄTEK BLOKU LEKCJI DO KOPIOWANIA -->
-<article class="lesson">
- <div class="lesson-body">
-  <!-- TEMAT LEKCJI -->
-  <h2>2. Arkusz kalkulacyjny - wprowadzenie</h2>
-  <div class="content">
-   <div>
-    <!-- DATA PUBLIKACJI: oba zapisy dotyczą tej samej daty. -->
-    <p class="meta">Data publikacji: <time datetime="2026-09-10">10.09.2026</time></p>
-    <!-- KOMENTARZ OPCJONALNY: możesz usunąć cały poniższy akapit. -->
-    <p class="comment">Prezentacja multimedialna</p>
-   </div>
-   <!-- MATERIAŁY PO PRAWEJ: zastąp przyciski i notatkę poniżej takimi odnośnikami:
-   <a href="pliki/lekcja-1.pdf" target="_blank" rel="noopener">Otwórz PDF ↗</a>
-   <a href="pliki/lekcja-1.pdf" download>Pobierz PDF</a>
-   W href wpisz adres PDF z WordPressa albo ścieżkę do własnego pliku.
-   Dla OneDrive użyj linku udostępniania tylko do odczytu: uczeń otworzy podgląd,
-   a następnie wybierze Pobierz. Atrybut download nie gwarantuje pobrania
-   plików z innej domeny — decyduje także serwer i przeglądarka.
-   -->
-   <div class="actions"><a href="https://drive.google.com/file/d/1lbCKviV6h7PwKE8gszx4170LzHnLfsQ1/view?usp=sharing" target="_blank" rel="noopener">Otwórz materiał ↗</a><p class="placeholder">Pobieranie jest dostępne w podglądzie Dysku, jeśli właściciel je udostępnił.</p></div>
-  </div>
- </div>
- <!-- LINIA ODDZIELAJĄCA: kopiuj razem z lekcją. -->
- <hr>
-</article>
-<!-- KONIEC BLOKU LEKCJI DO KOPIOWANIA -->
-
-<!-- Przykładowe lekcje Writer pominięto: nie były uzupełnionymi materiałami klasy 8. -->
-<!-- POCZĄTEK BLOKU LEKCJI DO KOPIOWANIA
-Zmień tytuł h2, wpisz datę w time (datetime=RRRR-MM-DD), dodaj opis i linki w actions.
-Usuń hidden po uzupełnieniu. Skopiuj całe article, aby dodać kolejną lekcję. -->
-<article class="lesson" hidden data-template="true"><div class="lesson-body"><h2>Temat lekcji</h2><div class="content"><div><p class="meta">Data publikacji: <time>Do uzupełnienia</time></p><p class="comment">Opcjonalny komentarz.</p></div><div class="actions"><!-- Przykład: <a href="ADRES-PDF" target="_blank" rel="noopener">Otwórz PDF ↗</a> --><!-- Przykład: <a href="ADRES-PDF" download>Pobierz PDF</a> --></div></div></div><hr></article>
-<!-- KONIEC BLOKU LEKCJI DO KOPIOWANIA -->
-<!-- TU DODAWAJ LEKCJE, przed zamknięciem div poniżej. -->
+<!-- DZIAŁY: biały Arkusz kalkulacyjny i szary Python. Dodawaj materiały wewnątrz właściwego div. -->
+<div class="material-section" id="arkusz" style="background:#fff" aria-labelledby="arkusz-title"><h2 class="section-title" id="arkusz-title">Arkusz kalkulacyjny</h2><!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Zastosowania_arkusza_kalkulacyjnego_zadanieKartaPracy.pdf</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-29">29.10.2026</time></p><p class="comment">KL_8_SP</p></div><div class="actions"><a href="https://drive.google.com/file/d/1voxZvygQaYorm7AmPKMGRcmOyEwXLMrd/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>WprowadzenieDoArkuszaKalkulacyjnego2026.pdf</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-22">22.10.2026</time></p><p class="comment">KL_8_SP</p></div><div class="actions"><a href="https://drive.google.com/file/d/1WoGzYI7HAQ4Ap-Je1iFE_HvpVW9fh84n/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Przyklad_Excel_Srednia_Suma_CountIF.xlsx</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-14">14.09.2026</time></p><p class="comment">KL_8_SP</p></div><div class="actions"><a href="https://drive.google.com/file/d/1d4cZ_MWj68wy_JkxJLM1OUX_NWnefjgB/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Prezentacja.pptx</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-10">10.09.2026</time></p><p class="comment">KL_8_SP</p></div><div class="actions"><a href="https://drive.google.com/file/d/1Wbff1H2VZ1yAoj1JC8cRMzud6Y-ICKZt/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>L0_Wstęp_v1_2026.pdf</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-22">22.10.2026</time></p><p class="comment">KL_8_SP</p></div><div class="actions"><a href="https://drive.google.com/file/d/1lbCKviV6h7PwKE8gszx4170LzHnLfsQ1/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Klasa 8-min (1).pdf</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-10">10.09.2026</time></p><p class="comment">KL_8_SP</p></div><div class="actions"><a href="https://drive.google.com/file/d/1jyQYvlTWfGvqHv0durRjCm0z7302_bT1/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Klasa 8 - Więcej o pracy w arkuszu kalkulacyjnym-min (1).pdf</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-10">10.09.2026</time></p><p class="comment">KL_8_SP</p></div><div class="actions"><a href="https://drive.google.com/file/d/1RuUFr7MqiiZAG0FX8yjQL23TIZIwxB-a/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Dziennik ocen.xlsx</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-17">17.09.2026</time></p><p class="comment">KL_8_SP</p></div><div class="actions"><a href="https://drive.google.com/file/d/1XoqeFy21rzbXGkgoFxb6tR6Uug3y9FiY/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>SkoroszytDoWyszukajPionowo.xlsx</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-10">10.09.2026</time></p><p class="comment">ArkuszKalkulacyjny/Excel_Cwiczenia_L4</p></div><div class="actions"><a href="https://drive.google.com/file/d/1t7nxeGgu-VYNzVW6w31eFv8yhZkT6sMj/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Lekcja_3_Excel_WyszukajPionowo.pptx</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-22">22.10.2026</time></p><p class="comment">ArkuszKalkulacyjny/Excel_Cwiczenia_L4</p></div><div class="actions"><a href="https://drive.google.com/file/d/1nb12si3xsETDiOyLpnO75r_TKPoVcdM_/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>cwiczenia_arkusz_kalkulacyjny_klasa8_czesc2_UCZEN.xlsx</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-28">28.09.2026</time></p><p class="comment">ArkuszKalkulacyjny/Excel_Cwiczenia_L3</p></div><div class="actions"><a href="https://drive.google.com/file/d/1BzQM-LVmzoH07xQhmEXpIPtNKUQhQFwi/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>cwiczenia_arkusz_kalkulacyjny_klasa8_UCZEN.xlsx</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-29">29.10.2026</time></p><p class="comment">ArkuszKalkulacyjny/Excel_Cwiczenia_L2</p></div><div class="actions"><a href="https://drive.google.com/file/d/1lAjMTsJsUwPkmsZQGCF10VNEh36Ebrcb/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>lt8-d1-t4-zad7.xlsx</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-10">10.09.2026</time></p><p class="comment">14-zastosowania-arkusza-kalkulacyjnego</p></div><div class="actions"><a href="https://drive.google.com/file/d/1l4TKjZaZLvmakzKdrIVB7sQ5G_0cb3J7/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>lt8-d1-t4-zad4.xlsx</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-10">10.09.2026</time></p><p class="comment">14-zastosowania-arkusza-kalkulacyjnego</p></div><div class="actions"><a href="https://drive.google.com/file/d/1HJZt6Hr4j3Kpg3ykQ19JLolXuQHMrawZ/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>lt8-d1-t4-zad3.xlsx</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-10">10.09.2026</time></p><p class="comment">14-zastosowania-arkusza-kalkulacyjnego</p></div><div class="actions"><a href="https://drive.google.com/file/d/1hQuVIWy31Cj72hjyKVd9woq7t0kjJ95P/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>lt8-d1-t4-zad1.xlsx</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-10">10.09.2026</time></p><p class="comment">14-zastosowania-arkusza-kalkulacyjnego</p></div><div class="actions"><a href="https://drive.google.com/file/d/15DsJL7rH1Ub8sif9HKIZohs_OhYB2EBD/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>lt8-d1-t4-cw5.xlsx</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-10">10.09.2026</time></p><p class="comment">14-zastosowania-arkusza-kalkulacyjnego</p></div><div class="actions"><a href="https://drive.google.com/file/d/184H0uz4xf6cUv3h0aQssP5982izounQz/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>lt8-d1-t4-cw3.xlsx</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-10">10.09.2026</time></p><p class="comment">14-zastosowania-arkusza-kalkulacyjnego</p></div><div class="actions"><a href="https://drive.google.com/file/d/1xlyNVJDwQOr_5gSdVDyJQEG6hqICgNkz/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>lt8-d1-t4-cw1.xlsx</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-10">10.09.2026</time></p><p class="comment">14-zastosowania-arkusza-kalkulacyjnego</p></div><div class="actions"><a href="https://drive.google.com/file/d/1UwICSM7WHSq2HgLfkwBxbZmyNsi4_GFr/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Plik_dla_klasy_8.xlsx</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-29">29.10.2026</time></p><p class="comment">Zadania</p></div><div class="actions"><a href="https://drive.google.com/file/d/1svlxiPizZK96tzIy8HpCcOhYj4viyqai/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU --></div>
+<div class="material-section" id="python" style="background:#cfcfcf" aria-labelledby="python-title"><h2 class="section-title" id="python-title">Python</h2><!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Test_Python_liceum_sportowe.html</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-05">05.10.2026</time></p><p class="comment">KursPython</p></div><div class="actions"><a href="https://drive.google.com/file/d/1gXHK45KB5OFGdiOTVuyf73rb1S_jdjt1/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Python_Wstęp_2026.pdf</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-28">28.10.2026</time></p><p class="comment">KursPython</p></div><div class="actions"><a href="https://drive.google.com/file/d/1BNBjmpOkcjlkMewp_lq-_IYYp1jMXlaU/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Python_Tom_2_Kolekcje_Funkcje_Pliki.pdf</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-21">21.09.2026</time></p><p class="comment">KursPython</p></div><div class="actions"><a href="https://drive.google.com/file/d/1MBgS3WYUNOC8cnLly3k7-EUHcRig64ul/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Python_Tom_1_Fundamenty.pdf</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-21">21.09.2026</time></p><p class="comment">KursPython</p></div><div class="actions"><a href="https://drive.google.com/file/d/19gLMN8_nT8PcT7GoqWgrQEsnb7egjGsA/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Python_tablica_podpowiedzi_A4.pdf</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-15">15.10.2026</time></p><p class="comment">KursPython</p></div><div class="actions"><a href="https://drive.google.com/file/d/1DWReAJLy8MPMwM9LCFhLRI0Omzkhwts9/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Python_pobieranie_danych_od_użytkowniak.pdf</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-28">28.10.2026</time></p><p class="comment">KursPython</p></div><div class="actions"><a href="https://drive.google.com/file/d/16_z1OKYuXdmOjvDuZlI_ut-JuEtKlo5M/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Python_i_Excel_lekcja_dodatkowa.pdf</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-23">23.09.2026</time></p><p class="comment">KursPython</p></div><div class="actions"><a href="https://drive.google.com/file/d/1HCzTpXeOR0h2m42AXs9Mep7IYgY8i_rR/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>indexA1.docx</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-05">05.10.2026</time></p><p class="comment">KursPython</p></div><div class="actions"><a href="https://drive.google.com/file/d/1FKSmZPnmWXEFhZJ8P0SmVMHXCKevxvnI/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>WyborOpcji.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-26">26.10.2026</time></p><p class="comment">KursPython/Warunek_if</p></div><div class="actions"><a href="https://drive.google.com/file/d/1Q4I_2ZvptQaDkOlcfmEncF37T7Bb-bZr/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>SortBubble.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-28">28.10.2026</time></p><p class="comment">KursPython/Warunek_if</p></div><div class="actions"><a href="https://drive.google.com/file/d/1Ik0Go2v2K44NlVKDpNDF5MmBBhj71ey1/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>prosty warunek.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-26">26.10.2026</time></p><p class="comment">KursPython/Warunek_if</p></div><div class="actions"><a href="https://drive.google.com/file/d/1TTLxv9kShcSSqSOE4VEqe7NcLFd12opB/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>OcenaProgi.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-29">29.10.2026</time></p><p class="comment">KursPython/Warunek_if</p></div><div class="actions"><a href="https://drive.google.com/file/d/1hSpfzjU9NjneudXOdQtfhcnzNHy_iQ5g/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>LogikaBusines_KoszykSuma.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-26">26.10.2026</time></p><p class="comment">KursPython/Warunek_if</p></div><div class="actions"><a href="https://drive.google.com/file/d/1OqQow0vhKLXQnh_BMU3JPxYo1VDSKtbx/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>LogikaBusines_Koszyk.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-26">26.10.2026</time></p><p class="comment">KursPython/Warunek_if</p></div><div class="actions"><a href="https://drive.google.com/file/d/1NCkrvWNMad8rZNqOtLm6V-Ls1hVV_-Rt/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>CZYTAJ_MNIE.txt</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-14">14.09.2026</time></p><p class="comment">KursPython/Python_online_4_przyklady</p></div><div class="actions"><a href="https://drive.google.com/file/d/1d3WBL-DHuEk7W_AAzmg42bhyAsbC4VW8/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>04_wyszukiwarka.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-14">14.09.2026</time></p><p class="comment">KursPython/Python_online_4_przyklady</p></div><div class="actions"><a href="https://drive.google.com/file/d/1AwD4JDMBeiVtHcdRmeHtDibfdWKgoP8a/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>03_porownywarka.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-14">14.09.2026</time></p><p class="comment">KursPython/Python_online_4_przyklady</p></div><div class="actions"><a href="https://drive.google.com/file/d/1HZlc6q2WoZPeyQ6jx76qptHHleAWf2NV/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>02_inspektor_unicode.txt</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-21">21.09.2026</time></p><p class="comment">KursPython/Python_online_4_przyklady</p></div><div class="actions"><a href="https://drive.google.com/file/d/11c6RQ7eFZKQLHFsUMPMn8H2Qdoir49TA/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>02_inspektor_unicode.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-14">14.09.2026</time></p><p class="comment">KursPython/Python_online_4_przyklady</p></div><div class="actions"><a href="https://drive.google.com/file/d/1nTUCxuYEbV0e3Igr7bmouztCvSJffjrd/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>02_inspektor_unicode.pdf</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-21">21.09.2026</time></p><p class="comment">KursPython/Python_online_4_przyklady</p></div><div class="actions"><a href="https://drive.google.com/file/d/1x1ETmIEGrU9lEV1KE-8yHCX3iOZikQAH/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>01_wizytowka.txt</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-21">21.09.2026</time></p><p class="comment">KursPython/Python_online_4_przyklady</p></div><div class="actions"><a href="https://drive.google.com/file/d/1-uxRHWYKug0_WDcvZObnfX5HK1q4b7pc/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>01_wizytowka.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-14">14.09.2026</time></p><p class="comment">KursPython/Python_online_4_przyklady</p></div><div class="actions"><a href="https://drive.google.com/file/d/19mdH7nq0S3MGhEC4oewCVUzL3NS5BeUU/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>01_wizytowka.pdf</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-21">21.09.2026</time></p><p class="comment">KursPython/Python_online_4_przyklady</p></div><div class="actions"><a href="https://drive.google.com/file/d/1mzAHHAbqLugG0fasOkwxhQh_Ac-o6qQN/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>01_wizytowka_v_2.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-21">21.09.2026</time></p><p class="comment">KursPython/Python_online_4_przyklady</p></div><div class="actions"><a href="https://drive.google.com/file/d/1sE2c2UOwtunALkOEGYaf34p-b8Fzwmrt/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Python_tekst_dwa_skrypty.zip</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-05">05.10.2026</time></p><p class="comment">KursPython/Python_L5</p></div><div class="actions"><a href="https://drive.google.com/file/d/1R0n_5dsrwAbXD2oNyslVRojzrtbXdBb1/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Python_lista_zakupow_wzorzec_GUI.pdf</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-05">05.10.2026</time></p><p class="comment">KursPython/Python_L5</p></div><div class="actions"><a href="https://drive.google.com/file/d/1ZVdsNDwSai9jXd7WE15v-R4CxgzfQkxF/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>wyszukiwanie_wzorca.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-05">05.10.2026</time></p><p class="comment">KursPython/Python_L5/Python_tekst_dwa_skrypty</p></div><div class="actions"><a href="https://drive.google.com/file/d/14stk9aEjItxI9iw5WiImEylYkvmSSY1R/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>lista_zakupow.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-05">05.10.2026</time></p><p class="comment">KursPython/Python_L5/Python_tekst_dwa_skrypty</p></div><div class="actions"><a href="https://drive.google.com/file/d/1sGaEePk3kiCs3mYXY23aq3rlei2j5KnM/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>CZYTAJ_MNIE.txt</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-05">05.10.2026</time></p><p class="comment">KursPython/Python_L5/Python_tekst_dwa_skrypty</p></div><div class="actions"><a href="https://drive.google.com/file/d/1A06YHKSJNJFDK6fny4-MIsVgXYYPUGm3/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>wyszukiwanie_wzorca.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-05">05.10.2026</time></p><p class="comment">KursPython/Python_L5/programy_tekst</p></div><div class="actions"><a href="https://drive.google.com/file/d/18AbUna25bHc2Q8HQjs1rf2U_n6NQkT6J/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>wyszukiwanie_wzorca_od_1.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-05">05.10.2026</time></p><p class="comment">KursPython/Python_L5/programy_tekst</p></div><div class="actions"><a href="https://drive.google.com/file/d/1-WZqhYqCf-4bhqlcpc9gXzGI8hciSDDY/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Python_tekst_okno.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-05">05.10.2026</time></p><p class="comment">KursPython/Python_L5/programy_tekst</p></div><div class="actions"><a href="https://drive.google.com/file/d/1223i93r4AfazcPDcS5WXrrtnwD3Zgvn0/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>lista_zakupow.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-05">05.10.2026</time></p><p class="comment">KursPython/Python_L5/programy_tekst</p></div><div class="actions"><a href="https://drive.google.com/file/d/1iV20f9Pc_8Rvu5mWcBA2I3sAmmyYu0iQ/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>CZYTAJ_MNIE.txt</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-05">05.10.2026</time></p><p class="comment">KursPython/Python_L5/programy_tekst</p></div><div class="actions"><a href="https://drive.google.com/file/d/1Dh_oouek6CWCBE9AZm7DjegP1zykPkRZ/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Python_petle_i_warunki_lekcja.pdf</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-28">28.09.2026</time></p><p class="comment">KursPython/Python_L5/pdf</p></div><div class="actions"><a href="https://drive.google.com/file/d/1SnZtV_-3Etejaaki7EAMDqSvnjkhDIqk/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Python_lista_zakupow_wzorzec_GUI.pdf</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-10-05">05.10.2026</time></p><p class="comment">KursPython/Python_L5/pdf</p></div><div class="actions"><a href="https://drive.google.com/file/d/1zmuQ4cIyZONuied5ajf28VlztmjLv_VB/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Python_petle_i_warunki_programy.zip</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-28">28.09.2026</time></p><p class="comment">KursPython/Python_L4</p></div><div class="actions"><a href="https://drive.google.com/file/d/1hPuNoA-a2wkeVlt2cBL-uR4hBMkFTHdq/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>04_kalkulator_while.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-28">28.09.2026</time></p><p class="comment">KursPython/Python_L4/programy</p></div><div class="actions"><a href="https://drive.google.com/file/d/16H8pewfZQKulEIgiqRCmwjne_MHLqj8G/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>03_budzet_for.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-28">28.09.2026</time></p><p class="comment">KursPython/Python_L4/programy</p></div><div class="actions"><a href="https://drive.google.com/file/d/1HSiYg_FZw6e91PgpksN2jnh5jMPXuQyE/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>02_licznik_znaku.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-28">28.09.2026</time></p><p class="comment">KursPython/Python_L4/programy</p></div><div class="actions"><a href="https://drive.google.com/file/d/1Chfp8U5wVrhYm5Su_RMo4IP3UbYcFCRu/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>01_kalkulator_if.py</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-28">28.09.2026</time></p><p class="comment">KursPython/Python_L4/programy</p></div><div class="actions"><a href="https://drive.google.com/file/d/1-BB8Tid8heQ8IffY1X_ROVsP-LipEDdA/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>Python_petle_i_warunki_lekcja.pdf</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-28">28.09.2026</time></p><p class="comment">KursPython/Python_L4/pdf</p></div><div class="actions"><a href="https://drive.google.com/file/d/1z9pQxcf4giF7SQkGyhyzDGAPF9XSJL-b/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>04_wyszukiwarka.txt</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-14">14.09.2026</time></p><p class="comment">KursPython/Python_online_4_przyklady/wyniki</p></div><div class="actions"><a href="https://drive.google.com/file/d/1gQ7AfoABhSzskPGIdEDu71yak5MmWOq1/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>03_porownywarka.txt</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-14">14.09.2026</time></p><p class="comment">KursPython/Python_online_4_przyklady/wyniki</p></div><div class="actions"><a href="https://drive.google.com/file/d/1W-f22T8nJmJOHITe1PysvNl0AcHlvsbh/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>02_inspektor_unicode.txt</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-14">14.09.2026</time></p><p class="comment">KursPython/Python_online_4_przyklady/wyniki</p></div><div class="actions"><a href="https://drive.google.com/file/d/17Fb_DIzwmQShvRLll8IWCDM9xxpkl6y8/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU -->
+<!-- POCZĄTEK MATERIAŁU: kopiuj całe article razem z hr. Zmień h2, time i href. -->
+<article class="lesson"><div class="lesson-body"><h2>01_wizytowka.txt</h2><div class="content"><div><p class="meta">☀ Data modyfikacji pliku: <time datetime="2026-09-14">14.09.2026</time></p><p class="comment">KursPython/Python_online_4_przyklady/wyniki</p></div><div class="actions"><a href="https://drive.google.com/file/d/1slOPEc2ZiEjm_xaGwaw8v4DSOK7zhMRE/view" target="_blank" rel="noopener noreferrer">Otwórz materiał ↗</a></div></div></div><hr></article>
+<!-- KONIEC MATERIAŁU --></div>
 </div>
 <p id="empty" hidden>Brak lekcji pasujących do wyszukiwania. Wpisz inne słowo lub wyczyść pole.</p>
 </main>
-<footer class="school-footer">Informatyka · Szkoła podstawowa i liceum<br>Wersja 1.2 · <span aria-hidden="true">☀</span> Aktualizacja: <time datetime="2026-10-28">28.10.2026</time> · Autor: R.O. · <a href="https://szkolylodz.wordpress.com/">WordPress</a></footer>
+<footer class="school-footer">Informatyka · Szkoła podstawowa i liceum<br>Wersja 1.3 · <span aria-hidden="true">☀</span> Aktualizacja: <time datetime="2026-10-28">28.10.2026</time> · Autor: R.O. · <a href="https://szkolylodz.wordpress.com/">WordPress</a></footer>
 <script>
 /* MECHANIZM WYSZUKIWANIA — zostaw jeden raz na końcu strony.
    Samodzielny HTML: działa lokalnie i na hostingu obsługującym JavaScript.
@@ -124,8 +245,9 @@ function filterLessons() {
  lessons.forEach(lesson => {
   const match = matchesTitle(lesson.querySelector('h2').textContent, input.value);
   lesson.hidden = !match;
-  if (match) { lesson.classList.toggle('shade', count % 2 === 1); count++; }
+  if (match) count++;
  });
+ document.querySelectorAll('.material-section').forEach(section=>{section.hidden=![...section.querySelectorAll('.lesson')].some(lesson=>!lesson.hidden);});
  document.querySelector('#results').textContent = `Widoczne lekcje: ${count} z ${lessons.length}`;
  document.querySelector('#empty').hidden = count !== 0 || lessons.length === 0;
 }
