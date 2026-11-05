@@ -1,0 +1,19 @@
+[build]
+  command = "node build-netlify.mjs"
+  publish = "site"
+[build.environment]
+  NODE_VERSION = "22"
+[functions]
+  directory = "functions"
+  node_bundler = "esbuild"
+[[redirects]]
+  from = "/"
+  to = "/portal/index.html"
+  status = 302
+  force = true
+[[headers]]
+  for = "/kontakt-github.html"
+  [headers.values]
+    Referrer-Policy = "no-referrer"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
